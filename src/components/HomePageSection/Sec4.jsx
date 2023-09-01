@@ -13,7 +13,7 @@ import 'swiper/css/pagination';
 import { Grid, Pagination } from 'swiper/modules';
 const Sec4 = () => {
     return (
-        <div className='px-3 max-w-6xl mx-auto  mt-5 lg:mt-8'>
+        <div className='px-3 max-w-[1188px] mx-auto  mt-5 lg:mt-8'>
             <div className=' bg-white pt-3 '>
                 <div className='flex justify-between items-end border-b px-3 pb-2'>
                     <div>

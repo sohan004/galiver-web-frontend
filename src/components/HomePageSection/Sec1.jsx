@@ -16,7 +16,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 const Sec1 = () => {
     return (
         <div className='bg-[#ffdaaa62]'>
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-[1188px] mx-auto">
                 <Swiper centeredSlides={true} autoplay={{
                     delay: 3000,
                     disableOnInteraction: false,

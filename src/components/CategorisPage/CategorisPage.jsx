@@ -8,7 +8,7 @@ const CategorisPage = () => {
     // const quary = new URLSearchParams(useLocation().search)
     // console.log(quary.get('email'));
     return (
-        <div className='max-w-6xl mx-auto flex items-start'>
+        <div className='max-w-[1188px] mx-auto flex items-start'>
             <div className='h-[100vh] overflow-y-auto pt-3 border bg-slate-200  lg:w-56'>
                 <div className='py-2 px-2 lg:px-3 border-b border-stone-300 mb-4'>
                     <img className='lg:w-14 w-10 h-10 lg:h-14  mx-auto' src={img} alt="" />
