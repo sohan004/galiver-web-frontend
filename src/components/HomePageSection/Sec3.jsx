@@ -46,97 +46,97 @@ const Sec3 = () => {
                   className="mySwiper mt-1 lg:mt-2"
             >
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer group hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-150'>
+                    <div className='bg-white p-2 cursor-pointer hover:scale-105 hover:shadow-xl duration-200 hover:bg-slate-200'>
                         <img src={img} className='w-full h-[70px] lg:h-28 p-2' alt="" />
                         <p className='text-center text-sm lg:text-base '>Mobile</p>
                     </div>
