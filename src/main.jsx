@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   }
 ])
 
-// cmmmit by sohan
+// cmmmit by
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
