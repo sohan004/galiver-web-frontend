@@ -24,7 +24,9 @@ const router = createBrowserRouter([
   }
 ])
 
-// cmmmit by
+// new branch create commend  git checkout -b <branch name>
+// commit by sohan
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
