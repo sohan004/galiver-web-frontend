@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <>
-      <div className={`${cartSideBarState ? 'h-screen overflow-hidden' : 'overflow-y-auto'} text-black bg-[#F5F5F5] py-[3px] `}>
+      <div className={`${cartSideBarState && 'h-screen overflow-hidden'} text-black bg-[#F5F5F5] py-[3px] `}>
       <Nav></Nav>
         <RouterProvider router={router}></RouterProvider>
         {/* default loader . open command window.spin.showModal() . close command window.spin.close() */}
@@ -24,7 +24,7 @@ const App = () => {
         </dialog>
 
 
-        {/* Cart side bar   */}
+        {/* Cart side bar */}
         <CartSideBar />
       </div>
     </>
