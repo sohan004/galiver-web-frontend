@@ -1,5 +1,5 @@
-import React from 'react';
-import img from '../../assets/carusalIMG/productIMg2.jpg'
+
+import img from '../../../assets/carusalIMG/productIMg2.jpg'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles

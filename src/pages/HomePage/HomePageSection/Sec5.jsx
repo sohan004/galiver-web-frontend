@@ -1,5 +1,4 @@
-import React from 'react';
-import img from '../../assets/carusalIMG/productIMg2.jpg'
+import img from '../../../assets/carusalIMG/productIMg2.jpg'
 import { Rating } from '@smastrom/react-rating'
 
 import '@smastrom/react-rating/style.css'

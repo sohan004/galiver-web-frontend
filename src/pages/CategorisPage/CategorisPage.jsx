@@ -1,8 +1,4 @@
-import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 import img from '../../assets/carusalIMG/productIMg2.jpg'
-import img2 from '../../assets/carusalIMG/product.png'
-import QRCode from 'react-qr-code';
 
 
 const CategorisPage = () => {

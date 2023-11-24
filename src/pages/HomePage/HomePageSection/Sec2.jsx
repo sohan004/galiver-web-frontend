@@ -1,6 +1,6 @@
 
 import { FaArrowRight } from 'react-icons/fa';
-import img from '../../assets/categoryImg/6b396809-87e7-435d-ba7b-5d69699371ba.png'
+import img from '../../../assets/categoryImg/6b396809-87e7-435d-ba7b-5d69699371ba.png'
 
 const Sec2 = () => {
     return (
