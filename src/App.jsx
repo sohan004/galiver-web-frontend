@@ -24,7 +24,7 @@ const App = () => {
         </dialog>
 
 
-        {/* Cart side bar */}
+        {/* Cart side bar  */}
         <CartSideBar />
       </div>
     </>
