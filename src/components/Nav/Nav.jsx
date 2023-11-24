@@ -5,7 +5,7 @@ import logo3 from '../../assets/logo/png-04.png';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setState as cartSidebarState } from "../../features/CartSideBar/CartSideBarSlice";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
 
@@ -13,6 +13,7 @@ const Nav = () => {
     const [scrolTop, setScrolTop] = useState(0);
     const [navTop, setNavTop] = useState(true);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleScroll = () => {
         const scrollY = window.scrollY;
@@ -44,11 +45,15 @@ const Nav = () => {
         dispatch(cartSidebarState(true))
     }
 
+    const navigateeeee = () => {
+        navigate('/categories')
+    }
+
     return (
         <div className={`sticky ${navShow ? 'top-0' : '-top-40'} ${navTop ? 'shadow-none' : 'shadow-md'}  left-0 w-full duration-500  z-50 `}>
             <div className='bg-[#F5F5F5] hidden lg:block py-1'>
                 <div className='max-w-6xl mx-auto flex justify-center gap-16 items-center text-sm'>
-                    <Link to='/categories'><p>PROFILE</p></Link>
+                    <p onClick={navigateeeee}>PROFILE</p>
                     <p>MY MESSAGE</p>
                     <p>HELP CENTER</p>
                     <p>CONTACT US</p>
