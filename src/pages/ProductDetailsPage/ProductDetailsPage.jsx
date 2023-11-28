@@ -23,5 +23,4 @@ const ProductDetailsPage = () => {
 };
 
 export default ProductDetailsPage;
-
-// hello
+// new commit
