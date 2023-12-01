@@ -23,15 +23,16 @@ const ImgMegnify = ({
                     onMouseLeave={() => setShow(false)}
                     onMouseMove={onMove}
                     src={img}
-                    className='w-full  h-[400px]  '
+                    className='w-full  h-full '
                     alt="" />
+                {show && <span className="absolute top-0 left-0 h-full w-full bg-black pointer-events-none bg-opacity-50"></span>}
                 {show && <div style={{
                     top: `${cursorPosition.y - 100}px`,
                     left: `${cursorPosition.x - 100}px`,
-                }} className={` absolute pointer-events-none border-2 border-orange-400 rounded-sm z-50 `}>
+                }} className={` absolute pointer-events-none shadow-lg rounded-sm z-50 `}>
                     <div
                         style={{ backgroundImage: `url(${img})`, backgroundPosition: `${position.x}% ${position.y}%` }}
-                        className={`h-[200px] w-[200px] `}>
+                        className={`h-[200px] bg-no-repeat w-[200px] bg-cover `}>
                     </div>
                 </div>}
             </div>
