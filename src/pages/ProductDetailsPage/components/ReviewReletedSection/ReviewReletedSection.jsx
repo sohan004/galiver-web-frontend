@@ -7,6 +7,7 @@ import img from '../../../../assets/categoryImg/6b396809-87e7-435d-ba7b-5d696993
 import ProductCard from '../../../../components/ProductCard/ProductCard';
 import ReviewCard from '../../../../components/ReviewCard/ReviewCard';
 import { FaAngleRight } from 'react-icons/fa';
+//product details page
 const ReviewReletedSection = () => {
     return (
         <div className="bg-white flex flex-col md:flex-row  p-3 mt-4 ">
