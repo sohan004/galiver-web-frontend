@@ -23,7 +23,7 @@ const ImgMegnify = ({
                     onMouseLeave={() => setShow(false)}
                     onMouseMove={onMove}
                     src={img}
-                    className='w-full  h-full '
+                    className='w-full h-full'
                     alt="" />
                 {show && <span className="absolute top-0 left-0 h-full w-full bg-black pointer-events-none bg-opacity-50"></span>}
                 {show && <div style={{

@@ -4,7 +4,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import logo3 from '../../assets/logo/png-04.png';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setState as cartSidebarState } from "../../features/CartSideBar/CartSideBarSlice";
+import toggleCartSideBar from "../../Hooks/toggleCartSideBar";
 const Nav = () => {
 
     const [navShow, setNavShow] = useState(true);
@@ -39,7 +39,7 @@ const Nav = () => {
     }, [navShow, scrolTop, navTop]);
 
     const openCartSidebar = () => {
-        dispatch(cartSidebarState(true))
+        toggleCartSideBar(dispatch, 'open')
     }
 
     return (
