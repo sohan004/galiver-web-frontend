@@ -23,7 +23,7 @@ const ProductDetailsTopSection = () => {
     return (
         <>
            <div className='flex bg-white flex-col p-3 lg:flex-row gap-x-5 gap-y-3 select-none'>
-                <div className='w-full md:w-[60%] '>
+                <div className='w-full lg:w-[60%] '>
                     <div className='h-[200px] md:h-[350px]'>
                         <ImgMegnify img={img}></ImgMegnify>
                     </div>
@@ -34,7 +34,7 @@ const ProductDetailsTopSection = () => {
                         <img className='h-14 hover:border-orange-500 cursor-pointer border w-14 p-2' src={img} alt="" />
                     </div>
                 </div>
-                <div className='w-full md:w-[40%]'>
+                <div className='w-full lg:w-[40%]'>
                     <h1 className='text-xl lg:text-2xl '>Gulabari Premium Rose Water 120 ml (Pack of 4)</h1>
                     <div className='flex items-center gap-2 mt-3 '>
                         <div className='flex items-center text-sm text-yellow-500'>
