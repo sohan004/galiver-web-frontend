@@ -1,8 +1,8 @@
 
 // eslint-disable-next-line react/prop-types
-const Button = ({ children, w = 'max-content'  }) => {
+const Button = ({ children, w = 'max-content' }) => {
     return (
-        <button className={`flex items-center gap-2 bg-orange-600 p-2 justify-center w-[${w}] select-none hover:bg-orange-700 duration-300 active:scale-90 text-white rounded-md text-sm`}>{children}</button>
+        <button style={{width: w}} className={`flex items-center gap-2 bg-orange-600 p-2 justify-center  select-none hover:bg-orange-700 duration-300 active:scale-90 text-white rounded-md text-sm`}>{children}</button>
     );
 };
 
