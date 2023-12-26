@@ -3,6 +3,7 @@ import App from "../App"
 import CategorisPage from "../pages/CategorisPage/CategorisPage"
 import HomePage from "../pages/HomePage/HomePage"
 import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage"
+import PlaceOrder from "../pages/PlaceOrder/PlaceOrder"
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
 
         ]
     },
+    {
+        path: '/place-order',
+        element: <PlaceOrder></PlaceOrder>
+    }
 
 ])
 

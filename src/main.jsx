@@ -17,8 +17,8 @@ import Modal from './components/Modal/Modal.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
-      <div className='text-black bg-white'>
+      <div className=' text-black bg-[#f8f8f8] py-[3px]'>
+        <RouterProvider router={router} />
 
         {/* all sidebar */}
         <CartSideBar />

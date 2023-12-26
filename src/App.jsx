@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <>
-      <div className={`${cartSideBarState && 'h-screen overflow-hidden'} text-black bg-[#F5F5F5] py-[3px] `}>
+      <div className={`${cartSideBarState && 'h-screen overflow-hidden'} bg-[#f8f8f8] text-black `}>
         <Nav></Nav>
 
         <Outlet></Outlet>
