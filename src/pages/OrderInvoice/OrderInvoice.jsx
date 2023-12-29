@@ -13,24 +13,26 @@ const OrderInvoice = () => {
 
     const handlePrint = useReactToPrint({
         content: () => ref.current,
-      });
+    });
 
 
     return (
-        <div id='main-div' className="max-w-[659px] mx-auto px-4 ">
-            <div className='flex justify-end p-4'>
+        <div className="max-w-[659px] mx-auto px-4  py-5">
+            <div className='flex justify-end pb-4'>
                 <span
-                    onClick={() => handlePrint()}
-                >
+                    onClick={() => handlePrint()} >
                     <Button><FaDownload /> Download</Button>
                 </span>
             </div>
             <div className=" shadow-lg">
-                <div id='print-div' ref={ref} className="bg-white w-full p-4 md:p-8 rounded-lg   relative min-h-[842px] mx-auto">
+                <div ref={ref} className="bg-white w-full p-4 md:p-8 rounded-lg   relative mx-auto">
                     <img className='absolute w-64 left-2/4 top-2/4 -translate-x-2/4 opacity-5 -translate-y-2/4' src={logo2} alt="" />
-                    <div className="mb-4">
-                        <h1 className="text-xl md:text-2xl font-extrabold mb-1 text-gray-800">Order Invoice</h1>
-                        <p className="text-gray-400 text-sm">Order #78901 | January 15, 2023</p>
+                    <div className="mb-5 flex justify-between">
+                        <h1 className="text-xl md:text-2xl font-extrabold  text-gray-800">Order Invoice</h1>
+                        <div className='text-right'>
+                            <p className="text-gray-400 text-sm">Order #78901</p>
+                            <p className="text-gray-400 text-sm"> January 15, 2023</p>
+                        </div>
                     </div>
 
                     <div className="mb-4 border-b-2 border-gray-200 pb-3">
@@ -41,7 +43,7 @@ const OrderInvoice = () => {
                                 <p className="text-gray-700 text-xs">City, Country</p>
                                 <p className="text-gray-700 text-xs">+8800000000000</p>
                             </div>
-                            <div className='text-xs flex flex-col items-start gap-'>
+                            <div className='text-xs flex flex-col items-start gap justify-end text-right'>
                                 <img
                                     src={logo}
                                     alt="Company Logo"
@@ -104,6 +106,7 @@ const OrderInvoice = () => {
 
                     <div className="flex justify-end">
                         <div className="text-right flex flex-col gap-1">
+                            <p className=" text-xs">Total Item Price: <span className='text-gray-500'>$50</span></p>
                             <p className=" text-xs">Delivery Charge: <span className='text-gray-500'>$50</span></p>
                             <p className=" text-xs">Discount: <span className='text-gray-500'>-$30</span></p>
                             <p className=" text-xs">Tax: <span className='text-gray-500'>$00</span></p>
@@ -112,6 +115,9 @@ const OrderInvoice = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='text-center flex justify-center my-5'>
+                <Button>Continue Shopping</Button>
             </div>
         </div>
     );
