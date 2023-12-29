@@ -1,12 +1,29 @@
-import { AiFillDelete } from "react-icons/ai";
+
 import img from '../../assets/categoryImg/6b396809-87e7-435d-ba7b-5d69699371ba.png'
 import { BiSolidDiscount } from "react-icons/bi";
 import Button from "../../components/Button/Button";
+import { GiReceiveMoney } from "react-icons/gi";
+import { useState } from "react";
+import bkash from '../../assets/payment-logo/download.png'
+import card from '../../assets/payment-logo/images.png'
+
 
 const PlaceOrder = () => {
+
+    const [method, setMethod] = useState('bkash')
+
+    const matchMethod = (name) => {
+        if (method === name) {
+            return 'bg-orange-600'
+        }
+        else {
+            return 'bg-orange-200 '
+        }
+    }
+
     return (
         <div className="max-w-[1188px] mx-auto">
-            <p className="text-center bg-white shadow-lg p-2 font-semibold text-xl">Checkout <span className="text-orange-600">(01)</span></p>
+            <p className="text-center bg-white sticky top-0 z-50 shadow p-2 font-semibold text-xl">Checkout <span className="text-orange-600">(01)</span></p>
             <div className=" gap-3  mt-4 flex flex-col md:flex-row px-3">
                 <div className="w-full md:w-[70%]">
                     <Button w="100%">
@@ -14,26 +31,63 @@ const PlaceOrder = () => {
                     </Button>
                     <div className="mt-2 rounded-md  p-2 bg-white">
                         {
-                            new Array(5).fill(0).map((item, index) => <div key={index} className="flex mt-5 items-start gap-2 border-b p-3 relative">
-                                <img className="h-10 w-10 md:h-12 md:w-12" src={img} alt="" />
-                                <div>
-                                    <p className="cursor-pointer text-sm md:text-base hover:underline">Lorem ipsum . Dignissimos!</p>
-                                    <div className="flex items-center gap-4">
-                                        <p className="mt-1">$120</p>
-                                        <p>Qty: 4</p>
+                            new Array(5).fill(0).map((item, index) => <div key={index} className="flex mt-5 items-center justify-between gap-4 border-b px-3 pb-5 relative">
+                                <div className="flex items-center gap-3">
+                                    <p className="text-xs md:text-sm">{index + 1}.</p>
+                                    <div className="flex gap-4">
+                                        <img className="h-7 w-7 md:w-9 md:h-9 rounded-full" src={img} alt="" />
+                                        <div>
+                                            <p className="text-xs md:text-sm">asdfjsad asdfkasdkf askdfks</p>
+                                            <p className="text-xs opacity-50 mt-1">red, xl</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <AiFillDelete className="text-xl absolute top-2/4 cursor-pointer hover:text-red-700 text-red-600 right-3 -translate-y-2/4" />
+                                <p className="text-xs opacity-70">Qty: 4</p>
+                                <p className="text-sm">$150</p>
                             </div>)
                         }
                     </div>
                 </div>
+
+
                 <div className="w-full shadow rounded-md md:w-[30%] bg-white p-3">
-                    <p>Order Summary :</p>
+                    <div className="  flex flex-col gap-3 rounded-md  mx-auto">
+                        <div
+                            onClick={() => setMethod('bkash')}
+                            className=' p-2 flex items-center gap-4 cursor-pointer '>
+                            <div className='rounded-full  border p-1 border-orange-600'>
+                                <p className={`h-3 w-3 rounded-full  ${matchMethod('bkash')}`}></p>
+                            </div>
+                            <img src={bkash} className='w-20 ' alt="" />
+                        </div>
 
-                    <button className="flex items-center gap-1 bg-blue-600 py-1 px-2 justify-center text-white rounded-md mt-5 mb-3 text-xs active:scale-90 duration-300"><BiSolidDiscount className="text-xl " /> Apply Voucher</button>
+                        <div
+                            onClick={() => setMethod('card')}
+                            className=' p-2 flex items-center gap-4 cursor-pointer'>
+                            <div className='rounded-full  border p-1 border-orange-600'>
+                                <p className={`h-3 w-3 rounded-full  ${matchMethod('card')}`}></p>
+                            </div>
+                            <img src={card} className='w-20 ' alt="" />
+                        </div>
 
-                    <div className="mt-7 flex flex-col gap-1   mb-20 ">
+                        <div
+                            onClick={() => setMethod('cash')}
+                            className=' p-2 flex items-center gap-4 cursor-pointer'>
+                            <div className='rounded-full  border p-1 border-orange-600'>
+                                <p className={`h-3 w-3 rounded-full  ${matchMethod('cash')}`}></p>
+                            </div>
+                            <div className='flex items-end gap-2'>
+                                <GiReceiveMoney className='text-2xl  md:text-3xl text-blue-800' />
+                                <p className='text-base font-medium md:text-base'>Cash On Delivary</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p className="mt-10 font-medium mb-3">Order Summary :</p>
+
+                    <button className="flex items-center gap-1 bg-blue-600 py-1 px-2 justify-center text-white rounded-md mb-3 text-xs active:scale-90 duration-300"><BiSolidDiscount className="text-xl " /> Apply Voucher</button>
+
+                    <div className="mt-7 flex mb-20 flex-col gap-1    ">
                         <p className="text-sm flex items-center justify-between font-semibold"><span>Total Price</span> <span className="font-light">$122</span></p>
                         <p className="text-sm flex items-center justify-between font-semibold"><span>Delivary Charge</span> <span className="font-light">$60</span></p>
                         <p className="text-sm flex items-center justify-between font-semibold"><span>Tax</span> <span className="font-light">$0</span></p>
@@ -41,6 +95,7 @@ const PlaceOrder = () => {
                         <p className="text-sm border-b pb-2 mb-2 flex items-center justify-between font-semibold"><span>Voucher</span> <span className="font-light">$0</span></p>
                         <p className="text-sm flex items-center justify-between font-semibold"><span>Total</span> <span className="font-light">$155</span></p>
                     </div>
+
 
                     <button className={`flex items-center w-full gap-2 bg-orange-600 p-4 md:p-2 fixed left-0 md:sticky md:top-full bottom-0 justify-center  select-none hover:bg-orange-700 duration-300 active:scale-90 text-white rounded-none md:rounded-md text-sm`}>Confirm Order</button>
 

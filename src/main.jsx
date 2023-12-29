@@ -13,6 +13,8 @@ import Modal from './components/Modal/Modal.jsx'
 // new branch create commend  git checkout -b <branch name>
 // commit by sohan
 
+// node version 20.7.0
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

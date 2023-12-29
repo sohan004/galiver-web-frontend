@@ -1,7 +1,7 @@
 import img from '../../assets/carusalIMG/productIMg2.jpg'
 
 
-const CategorisPage = () => {
+const CategoriesPage = () => {
     // const quary = new URLSearchParams(useLocation().search)
     // console.log(quary.get('email'));
     return (
@@ -171,4 +171,4 @@ const CategorisPage = () => {
     );
 };
 
-export default CategorisPage;
+export default CategoriesPage;

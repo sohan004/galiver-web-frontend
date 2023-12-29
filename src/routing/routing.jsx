@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom"
 import App from "../App"
-import CategorisPage from "../pages/CategorisPage/CategorisPage"
+import CategoriesPage from "../pages/CategoriesPage/CategoriesPage"
 import HomePage from "../pages/HomePage/HomePage"
 import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage"
 import PlaceOrder from "../pages/PlaceOrder/PlaceOrder"
-import PaymentMethods from "../pages/PaymentMethods/PaymentMethods"
+import OrderInvoice from "../pages/OrderInvoice/OrderInvoice"
 
 const router = createBrowserRouter([
     {
@@ -17,13 +17,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/categories',
-                element: <CategorisPage></CategorisPage>
+                element: <CategoriesPage></CategoriesPage>
             },
             {
                 path: '/product/:id',
                 element: <ProductDetailsPage></ProductDetailsPage>
             },
-            
+
         ]
     },
     {
@@ -31,12 +31,9 @@ const router = createBrowserRouter([
         element: <PlaceOrder></PlaceOrder>
     },
     {
-        path: '/payment-method',
-        element: <PaymentMethods />
-    }
-
-
-
+        path: '/invoice',
+        element: <OrderInvoice></OrderInvoice>
+    },
 ])
 
 
