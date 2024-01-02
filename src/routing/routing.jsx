@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
-import App from "../App"
+import LayoutWithNav from "../LayoutWithNav"
 import CategoriesPage from "../pages/CategoriesPage/CategoriesPage"
 import HomePage from "../pages/HomePage/HomePage"
 import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage"
@@ -9,7 +9,7 @@ import OrderInvoice from "../pages/OrderInvoice/OrderInvoice"
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App></App>,
+        element: <LayoutWithNav></LayoutWithNav>,
         children: [
             {
                 path: '/',

@@ -15,6 +15,7 @@ const OrderInvoice = () => {
         content: () => ref.current,
     });
 
+    '../../../.././ecommerce-practice/src/pages/OrderInvoice/OrderInvoice.jsx'
 
     return (
         <div className="max-w-[659px] mx-auto px-4  py-5">

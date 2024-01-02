@@ -1,8 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import toggleCartSideBar from "../../Hooks/toggleCartSideBar";
 import { RiShoppingCartFill } from "react-icons/ri";
 import OrderCard from "../OrderCard/OrderCard";
 import { FaShoppingBag } from "react-icons/fa";
+import { setState } from "../../features/CartSideBar/CartSideBarSlice"
+
+
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const toggleCartSideBar = (dispatch, e = false) => {
+    e === 'open'
+        ? dispatch(setState(true))
+        : dispatch(setState(false))
+}
+
+
 
 const CartSideBar = () => {
     const { state } = useSelector(state => state.cartSideBar);

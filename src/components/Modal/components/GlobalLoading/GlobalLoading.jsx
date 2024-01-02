@@ -1,5 +1,14 @@
 import logo from '../../../../assets/logo/png-02.png'
 
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const toggleGlobalLoading = (e) => {
+    e === 'open'
+        ? window.spin.showModal()
+        : window.spin.close()
+}
+
+
 const GlobalLoading = () => {
     return (
         <>

@@ -4,22 +4,23 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import logo3 from '../../assets/logo/png-04.png';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import toggleCartSideBar from "../../Hooks/toggleCartSideBar";
+import { toggleCartSideBar } from "../CartSideBar/CartSideBar";
+import { toggleSignIn } from "../Modal/components/SignIn/SignIn";
 const Nav = () => {
 
     const [navShow, setNavShow] = useState(true);
-    const [scrolTop, setScrolTop] = useState(0);
+    const [scrollTop, setScrollTop] = useState(0);
     const [navTop, setNavTop] = useState(true);
     const dispatch = useDispatch();
 
     const handleScroll = () => {
         const scrollY = window.scrollY;
-        setScrolTop(scrollY);
+        setScrollTop(scrollY);
         if (scrollY > 200) {
-            if (scrollY > scrolTop) {
+            if (scrollY > scrollTop) {
                 setNavShow(false);
             }
-            else if (scrollY < scrolTop) {
+            else if (scrollY < scrollTop) {
                 setNavShow(true);
             }
         }
@@ -36,7 +37,7 @@ const Nav = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [navShow, scrolTop, navTop]);
+    }, [navShow, scrollTop, navTop]);
 
     const openCartSidebar = () => {
         toggleCartSideBar(dispatch, 'open')
@@ -51,7 +52,7 @@ const Nav = () => {
                     <p>HELP CENTER</p>
                     <p>CONTACT US</p>
                     <p>ACCOUNT</p>
-                    <p>LOGIN / SIGNUP</p>
+                    <p onClick={()=>toggleSignIn('open')}>LOGIN / SIGNUP</p>
                 </div>
             </div>
 
