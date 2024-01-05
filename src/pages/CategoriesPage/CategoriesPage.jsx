@@ -5,7 +5,7 @@ const CategoriesPage = () => {
     // const quary = new URLSearchParams(useLocation().search)
     // console.log(quary.get('email'));
     return (
-        <div className='max-w-[1188px] mx-auto flex items-start'>
+        <div className=' flex items-start'>
             <div style={{}} className='h-[100vh] categoris overflow-y-auto grid grid-cols-1   border bg-orange-600 text-white  shadow-lg z-30 lg:w-56'>
                 <div className='py-3 px-2 lg:px-3 border-b border-stone-300 pb-4 cursor-pointer duration-300 hover:bg-orange-700'>
                     <img className='lg:w-14 w-10 h-10 lg:h-14  mx-auto' src={img} alt="" />

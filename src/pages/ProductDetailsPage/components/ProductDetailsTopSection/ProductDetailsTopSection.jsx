@@ -24,7 +24,7 @@ const ProductDetailsTopSection = () => {
         <>
            <div className='flex bg-white flex-col p-3 lg:flex-row gap-x-5 gap-y-3 select-none'>
                 <div className='w-full lg:w-[60%] '>
-                    <div className='h-[200px] md:h-[350px]'>
+                    <div className='h-[150px] md:h-[350px]'>
                         <ImgMegnify img={img}></ImgMegnify>
                     </div>
                     <div className='mt-4 flex items-center gap-2 '>

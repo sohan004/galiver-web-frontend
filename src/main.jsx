@@ -8,12 +8,8 @@ import router from './routing/routing.jsx'
 import CartSideBar from './components/CartSideBar/CartSideBar.jsx'
 import Modal from './components/Modal/Modal.jsx'
 
-
-
-// new branch create commend  git checkout -b <branch name>
-// commit by sohan
-
 // node version 20.7.0
+// block z index 1000000, 10000000, 9999, 99999
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

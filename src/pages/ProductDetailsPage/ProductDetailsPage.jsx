@@ -6,7 +6,7 @@ import ReviewReletedSection from "./components/ReviewReletedSection/ReviewRelete
 const ProductDetailsPage = () => {
 
     return (
-        <div className='max-w-[1188px] mx-auto pb-20'>
+        <div className=' pb-20'>
             <ProductDetailsTopSection />
             <ReviewReletedSection />
         </div>

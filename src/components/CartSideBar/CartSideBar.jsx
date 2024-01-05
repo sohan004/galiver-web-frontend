@@ -1,38 +1,47 @@
-import { useDispatch, useSelector } from "react-redux";
 import { RiShoppingCartFill } from "react-icons/ri";
 import OrderCard from "../OrderCard/OrderCard";
 import { FaShoppingBag } from "react-icons/fa";
-import { setState } from "../../features/CartSideBar/CartSideBarSlice"
-
 
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const toggleCartSideBar = (dispatch, e = false) => {
-    e === 'open'
-        ? dispatch(setState(true))
-        : dispatch(setState(false))
+export const toggleCartSideBar = (e) => {
+    const parent = document.getElementById('cartSideBar-parent');
+    const child = document.getElementById('cart-sidebar-child');
+    
+    if (e === 'open') {
+        parent.classList.remove('scale-0', 'opacity-0');
+        parent.classList.add('scale-100', 'opacity-100');
+        child.classList.remove('right-[-280px]', 'md:right-[-350px]');
+        child.classList.add('right-0');
+    }
+    else {
+        parent.classList.remove('scale-100', 'opacity-100');
+        parent.classList.add('scale-0', 'opacity-0');
+        child.classList.remove('right-0');
+        child.classList.add('right-[-280px]', 'md:right-[-350px]');
+    }
 }
 
 
 
 const CartSideBar = () => {
-    const { state } = useSelector(state => state.cartSideBar);
-    const dispatch = useDispatch();
 
-    const closeSideBar = () => {
-        toggleCartSideBar(dispatch, false)
-    }
+    // scale-100 opacity-100
+    // scale-0 opacity-0
 
+    // right-0
+    // 'right-[-100%] md:-right-[400px]
 
     return (
         <>
-            <div onClick={closeSideBar} className={`fixed tt  backdrop-blur-sm bg  bg-black bg-opacity-50 z-[9998] ${state ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} top-0 left-0 w-full h-full `}> </div>
-            <div className={`bg-white fixed duration-500 transition-all z-[99999] ${state ? 'right-0 ' : 'right-[-100%] md:-right-[400px]'} flex flex-col top-0 w-[85%] md:w-[400px]  h-full overflow-y-auto`}>
+            <div id="cartSideBar-parent" onClick={() => toggleCartSideBar()} className={`fixed tt  backdrop-blur-sm bg  bg-black bg-opacity-50 z-[9998] scale-0 opacity-0 top-0 left-0 w-full h-full `}> </div>
+            
+            <div id="cart-sidebar-child" className={`bg-white fixed duration-500 transition-all z-[99999]  flex flex-col top-0 w-[280px] md:w-[350px] right-[-280px] md:right-[-350px]  h-full overflow-y-auto`}>
                 {/* content */}
                 <div className="flex-grow overflow-hidden overflow-y-auto">
                     <p className=" bg-orange-500 text-white text-center flex items-center gap-2 justify-center font-semibold text-base md:text-lg p-3"> <RiShoppingCartFill className="text-2xl" />Shopping Cart</p>
 
-                    <div className="flex flex-col gap-7">
+                    <div className="flex flex-col ">
                         {new Array(5).fill(0).map((iitem, i) => <OrderCard key={i} />)}
                     </div>
 

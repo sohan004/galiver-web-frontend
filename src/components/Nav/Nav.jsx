@@ -1,17 +1,22 @@
+/* eslint-disable react/prop-types */
 import { FaSearch, } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-
 import logo3 from '../../assets/logo/png-04.png';
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { toggleCartSideBar } from "../CartSideBar/CartSideBar";
 import { toggleSignIn } from "../Modal/components/SignIn/SignIn";
-const Nav = () => {
+import { toggleGlobalLoading } from "../Modal/components/GlobalLoading/GlobalLoading";
+import shoppingCartICon from '../../assets/SidebarIcon/shopping-cart.png'
+import { RiMenu2Fill } from "react-icons/ri";
+const Nav = ({
+    showLeftSideBar,
+    setShowLeftSideBar,
+    setShowLeftSideBar2,
+    showLeftSideBar2,
+}) => {
 
     const [navShow, setNavShow] = useState(true);
     const [scrollTop, setScrollTop] = useState(0);
     const [navTop, setNavTop] = useState(true);
-    const dispatch = useDispatch();
 
     const handleScroll = () => {
         const scrollY = window.scrollY;
@@ -40,32 +45,40 @@ const Nav = () => {
     }, [navShow, scrollTop, navTop]);
 
     const openCartSidebar = () => {
-        toggleCartSideBar(dispatch, 'open')
+        toggleCartSideBar('open')
     }
 
     return (
-        <div className={`sticky ${navShow ? 'top-0' : '-top-40'} ${navTop ? 'shadow-none' : 'shadow-md'}  left-0 w-full duration-700  z-50 `}>
-            <div className='bg-[#F5F5F5] hidden lg:block py-1'>
-                <div className='max-w-6xl mx-auto flex justify-center gap-16 items-center text-sm'>
-                    <p>PROFILE</p>
-                    <p>MY MESSAGE</p>
-                    <p>HELP CENTER</p>
-                    <p>CONTACT US</p>
-                    <p>ACCOUNT</p>
-                    <p onClick={()=>toggleSignIn('open')}>LOGIN / SIGNUP</p>
-                </div>
-            </div>
-
+        <div className={`sticky select-none ${navShow ? 'top-0' : '-top-40'} ${navTop ? 'shadow-none' : 'shadow-md'}  left-0 w-full duration-700  z-50 `}>
             <div className='bg-white py-3'>
-                <div className='max-w-6xl mx-auto flex gap-3 lg:justify-between items-center lg:gap-7 px-3'>
-                    <img src={logo3} className='w-36 hidden lg:block' alt="" />
-                    <div className='flex items-center bg-slate-100 justify-between flex-grow'>
-                        <input placeholder='search in Galiver' type="text" className='bg-transparent px-3 outline-none flex-grow' />
-                        <FaSearch className='text-white active:scale-75 cursor-pointer bg-orange-600 hover:bg-orange-700 duration-200 text-3xl lg:text-5xl p-2 lg:p-3 select-none'></FaSearch>
+                <div className='max-w-7xl mx-auto flex gap-3 lg:justify-between items-center lg:gap-7 px-3'>
+                    <div className="flex items-center gap-3">
+                        <RiMenu2Fill
+                            onClick={() => setShowLeftSideBar2(!showLeftSideBar2)}
+                            className={`block md:hidden text-2xl cursor-pointer duration-200 ${showLeftSideBar2 ? 'rotate-180' : 'rotate-0'}`} />
+                        <RiMenu2Fill
+                            onClick={() => setShowLeftSideBar(!showLeftSideBar)}
+                            className={`hidden md:block text-2xl cursor-pointer duration-200 ${showLeftSideBar ? 'rotate-180' : 'rotate-0'}`} />
+                        <img src={logo3} className='w-36 hidden md:block' alt="" />
                     </div>
-                    <AiOutlineShoppingCart
-                        onClick={openCartSidebar}
-                        className='lg:text-3xl cursor-pointer duration-150 active:scale-75 select-none text-2xl text-black'></AiOutlineShoppingCart>
+                    <div className="flex-1 overflow-hidden relative flex items-center bg-slate-100">
+                        <input
+                            placeholder='search in Galiver'
+                            type="text"
+                            className="flex-1 bg-transparent px-2 py-2 outline-none " />
+                        <div className="absolute right-0 top-0 h-full flex items-center justify-center bg-orange-600 hover:bg-orange-700 cursor-pointer text-white duration-300  p-2 lg:p-3 select-none group"
+                        >
+                            <FaSearch className="group-active:scale-50 duration-300"/>
+                        </div>
+                    </div>
+                    <div>
+                        <img 
+                         onClick={openCartSidebar}
+                        src={shoppingCartICon} className="w-6 md:w-7 cursor-pointer duration-150  active:scale-75 select-none" alt="" />
+                        {/* <AiOutlineShoppingCart
+                           
+                            className=' text-2xl md:text-3xl text-black'></AiOutlineShoppingCart> */}
+                    </div>
                 </div>
             </div>
         </div>
