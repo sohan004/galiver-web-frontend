@@ -7,6 +7,7 @@ import icon5 from '../../assets/SidebarIcon/eggs.png'
 import icon2 from '../../assets/SidebarIcon/fast-food.png'
 import icon3 from '../../assets/SidebarIcon/meat.png'
 import Categories from './components/Categories/Categories'
+import { NavLink } from 'react-router-dom'
 
 
 const LeftSidebar = () => {
@@ -415,7 +416,7 @@ const LeftSidebar = () => {
             <img src={logo} alt="" className='w-36 ms-5 md:hidden mb-7' />
             <div className='flex flex-col border-b pb-3'>
                 <p className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={orderIcon} alt="" /> My Order</p>
-                <p className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={profileIcon} alt="" /> Profile</p>
+                <NavLink to='/profile' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={profileIcon} alt="" /> Profile</NavLink>
                 <p className='flex items-center  cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={messageIcon} alt="" /> Messenger</p>
             </div>
             <div>

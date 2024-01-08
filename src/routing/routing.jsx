@@ -1,15 +1,16 @@
 import { createBrowserRouter } from "react-router-dom"
-import LayoutWithNav from "../LayoutWithNav"
 import CategoriesPage from "../pages/CategoriesPage/CategoriesPage"
 import HomePage from "../pages/HomePage/HomePage"
 import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage"
 import PlaceOrder from "../pages/PlaceOrder/PlaceOrder"
 import OrderInvoice from "../pages/OrderInvoice/OrderInvoice"
+import LayoutWithNavSidebar from "../Layout/LayoutWithNavSidebar/LayoutWithNavSidebar"
+import Profile from "../pages/Profile/Profile"
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <LayoutWithNav></LayoutWithNav>,
+        element: <LayoutWithNavSidebar></LayoutWithNavSidebar>,
         children: [
             {
                 path: '/',
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         path: '/invoice',
         element: <OrderInvoice></OrderInvoice>
     },
+    {
+        path: '/profile',
+        element: <Profile></Profile>
+    }
 ])
 
 
