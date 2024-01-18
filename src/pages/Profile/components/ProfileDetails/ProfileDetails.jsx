@@ -14,6 +14,9 @@ const ProfileDetails = () => {
                     <button className="btn btn-sm bg border-orange-600 w-[155px] capitalize bg-transparent text-orange-600 ">Remove</button>
                 </div>
             </div>
+            <div className='flex flex-col gap-4'>
+              
+            </div>
         </div>
     );
 };

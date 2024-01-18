@@ -34,7 +34,7 @@ const CartSideBar = () => {
 
     return (
         <>
-            <div id="cartSideBar-parent" onClick={() => toggleCartSideBar()} className={`fixed tt  backdrop-blur-sm bg  bg-black bg-opacity-50 z-[9998] scale-0 opacity-0 top-0 left-0 w-full h-full `}> </div>
+            <div id="cartSideBar-parent" onClick={() => toggleCartSideBar()} className={`fixed   backdrop-blur-sm   bg-black bg-opacity-50 z-[9998] scale-0 opacity-0 top-0 left-0 w-full h-full `}> </div>
             
             <div id="cart-sidebar-child" className={`bg-white fixed duration-500 transition-all z-[99999]  flex flex-col top-0 w-[280px] md:w-[350px] right-[-280px] md:right-[-350px]  h-full overflow-y-auto`}>
                 {/* content */}

@@ -4,14 +4,12 @@ import logo3 from '../../assets/logo/png-04.png';
 import { useEffect, useState } from "react";
 import { toggleCartSideBar } from "../CartSideBar/CartSideBar";
 import { toggleSignIn } from "../Modal/components/SignIn/SignIn";
-import { toggleGlobalLoading } from "../Modal/components/GlobalLoading/GlobalLoading";
+import GlobalLoading, { toggleGlobalLoading } from "../Modal/components/GlobalLoading/GlobalLoading";
 import shoppingCartICon from '../../assets/SidebarIcon/shopping-cart.png'
 import { RiMenu2Fill } from "react-icons/ri";
 const Nav = ({
     showLeftSideBar,
     setShowLeftSideBar,
-    setShowLeftSideBar2,
-    showLeftSideBar2,
 }) => {
 
     const [navShow, setNavShow] = useState(true);
@@ -54,11 +52,8 @@ const Nav = ({
                 <div className='max-w-7xl mx-auto flex gap-3 lg:justify-between items-center lg:gap-7 px-3'>
                     <div className="flex items-center gap-3">
                         <RiMenu2Fill
-                            onClick={() => setShowLeftSideBar2(!showLeftSideBar2)}
-                            className={`block md:hidden text-2xl cursor-pointer duration-200 ${showLeftSideBar2 ? 'rotate-180' : 'rotate-0'}`} />
-                        <RiMenu2Fill
                             onClick={() => setShowLeftSideBar(!showLeftSideBar)}
-                            className={`hidden md:block text-2xl cursor-pointer duration-200 ${showLeftSideBar ? 'rotate-180' : 'rotate-0'}`} />
+                            className={` text-2xl cursor-pointer duration-200 ${showLeftSideBar ? 'rotate-180' : 'rotate-0'}`} />
                         <img src={logo3} className='w-36 hidden md:block' alt="" />
                     </div>
                     <div className="flex-1 overflow-hidden relative flex items-center bg-slate-100">
@@ -68,16 +63,13 @@ const Nav = ({
                             className="flex-1 bg-transparent px-2 py-2 outline-none " />
                         <div className="absolute right-0 top-0 h-full flex items-center justify-center bg-orange-600 hover:bg-orange-700 cursor-pointer text-white duration-300  p-2 lg:p-3 select-none group"
                         >
-                            <FaSearch className="group-active:scale-50 duration-300"/>
+                            <FaSearch  onClick={()=>toggleGlobalLoading('open')} className="group-active:scale-50 duration-300" />
                         </div>
                     </div>
                     <div>
-                        <img 
-                         onClick={openCartSidebar}
-                        src={shoppingCartICon} className="w-6 md:w-7 cursor-pointer duration-150  active:scale-75 select-none" alt="" />
-                        {/* <AiOutlineShoppingCart
-                           
-                            className=' text-2xl md:text-3xl text-black'></AiOutlineShoppingCart> */}
+                        <img
+                            onClick={openCartSidebar}
+                            src={shoppingCartICon} className="w-6 md:w-7 cursor-pointer duration-150  active:scale-75 select-none" alt="" />
                     </div>
                 </div>
             </div>
