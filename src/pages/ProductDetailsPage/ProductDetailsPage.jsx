@@ -40,7 +40,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </div>
                     <h1 className="text-xl lg:text-3xl font-bold text-gray-800 mt-7 mb-4">Jenny’s Closets - The winter top for female, green</h1>
-                </div>
+                </div>  
 
                 <div className="w-full lg:w-[40%]">
                     <div className="flex items-center gap-3  mb-3 lg:mb-6">
