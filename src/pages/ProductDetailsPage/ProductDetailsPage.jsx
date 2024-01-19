@@ -26,22 +26,24 @@ const ProductDetailsPage = () => {
                 <span></span>
             </div>
 
-            <div className="flex mt-7 gap-8 flex-col lg:flex-row">
-                <div className="w-full lg:w-[60%] flex items-start gap-5 flex-col-reverse lg:flex-row">
-                    <div className="lg:w-[15%] w-full grid grid-cols-4 lg:grid-cols-1  gap-6">
-                        <img src={imgLink} className="max-h-32 w-full rounded-md  border border-orange-600" alt="" />
-                        <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
-                        <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
-                        <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
+            <div className="flex mt-7 gap-2 lg:gap-8 flex-col lg:flex-row">
+                <div className="w-full lg:w-[60%]">
+                    <div className=" flex items-start gap-5 flex-col-reverse lg:flex-row ">
+                        <div className="lg:w-[15%] w-full grid grid-cols-4 lg:grid-cols-1  gap-6">
+                            <img src={imgLink} className="max-h-32 w-full rounded-md  border border-orange-600" alt="" />
+                            <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
+                            <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
+                            <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
+                        </div>
+                        <div className="w-full lg:w-[85%] ">
+                            <img src={imgLink} className="w-full max-h-[230px]  lg:max-h-[470px] rounded-lg" alt="" />
+                        </div>
                     </div>
-                    <div className="w-full lg:w-[85%] ">
-                        <img src={imgLink} className="w-full max-h-[230px]  lg:max-h-[470px] rounded-lg" alt="" />
-                    </div>
+                    <h1 className="text-xl lg:text-3xl font-bold text-gray-800 mt-7 mb-4">Jenny’s Closets - The winter top for female, green</h1>
                 </div>
 
                 <div className="w-full lg:w-[40%]">
-                    <h1 className="text-xl lg:text-3xl font-bold text-gray-800">Jenny’s Closets - The winter top for female, green</h1>
-                    <div className="flex items-center gap-3 mt-4 lg:mt-5 mb-3 lg:mb-6">
+                    <div className="flex items-center gap-3  mb-3 lg:mb-6">
                         <div className="flex items-center gap-1 text-xs text-yellow-500">
                             <FaStar />
                             <FaStar />
