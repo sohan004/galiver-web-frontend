@@ -2,9 +2,11 @@ import { FaStar } from "react-icons/fa";
 import ProductDetailsTopSection from "./components/ProductDetailsTopSection/ProductDetailsTopSection";
 import ReviewReletedSection from "./components/ReviewReletedSection/ReviewReletedSection";
 import { MdLocalOffer, MdOutlineFavoriteBorder } from "react-icons/md";
-import { FaEarthAfrica, FaPeopleRoof } from "react-icons/fa6";
+import { FaCartShopping, FaEarthAfrica, FaPeopleRoof } from "react-icons/fa6";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { GiShoppingBag } from "react-icons/gi";
+import { FiShoppingCart } from "react-icons/fi";
 
 
 
@@ -35,8 +37,9 @@ const ProductDetailsPage = () => {
                             <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
                             <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
                         </div>
-                        <div className="w-full lg:w-[85%] ">
+                        <div className="w-full lg:w-[85%] relative">
                             <img src={imgLink} className="w-full max-h-[230px]  lg:max-h-[470px] rounded-lg" alt="" />
+                            <MdOutlineFavoriteBorder className="text-2xl md:text-3xl absolute bottom-3 right-3 text-orange-600" />
                         </div>
                     </div>
                     <h1 className="text-xl lg:text-3xl font-bold text-gray-800 mt-7 mb-4">Jenny’s Closets - The winter top for female, green</h1>
@@ -75,9 +78,9 @@ const ProductDetailsPage = () => {
                             <span className="w-7 h-7 rounded cursor-pointer bg-gray-600"></span>
                         </div>
                     </div>
-                    <div className="mt-9 flex items-center gap-0 lg:gap-3 fixed lg:static bottom-0 left-0 w-full bg-white z-40">
-                        <button className="btn bg-orange-600 border-orange-600 text-white rounded-none lg:rounded-md hover:bg-orange-800 flex-1 lg:max-w-[180px]">Add To Cart</button>
-                        <button className="btn bg-transparent border rounded-none lg:rounded-md text-orange-600 border-orange-200 text-lg"><MdOutlineFavoriteBorder /></button>
+                    <div className="mt-9 flex items-center gap-0 md:gap-3  w-full bg-white">
+                        <button className="btn bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] fixed md:static bottom-0 left-0 w-full z-40"><GiShoppingBag className="text-2xl" /> Buy Now</button>
+                        <button className="btn border border-orange-600 text-orange-600 bg-transparent rounded-md hover:bg-orange-600 hover:text-white  max-w-[180px]  ">Add To Cart <FiShoppingCart className="text-xl" /></button>
                     </div>
                     <div className="mt-7 flex flex-col gap-2">
                         <p className="flex items-center gap-2 text-sm text-gray-500"><FaEarthAfrica />Free shipping worldwide</p>
