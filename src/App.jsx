@@ -4,6 +4,7 @@ import CartSideBar from "./components/CartSideBar/CartSideBar";
 import Modal from "./components/Modal/Modal";
 
 const App = () => {
+
     return (
         <>
             <div className=' text-black bg-[#f8f8f8] '>

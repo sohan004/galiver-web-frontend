@@ -23,7 +23,7 @@ const SignIn = () => {
         <>
             <div id="signIn-parent" className="fixed hidden top-0 left-0 w-full h-full overflow-hidden backdrop-blur-sm bg-[#000000a1] z-[9999]"></div>
 
-            <div id='sign-in' className="select-none max-w-[520px] fixed  p-4 top-[0%] scale-0 opacity-0 left-2/4 -translate-x-2/4 duration-500  w-full -translate-y-2/4 z-[99999]">
+            <div id='sign-in' className="select-none max-w-[520px] fixed  p-4 top-2/4 invisible scale-90 opacity-0 left-2/4 -translate-x-2/4 duration-300  w-full -translate-y-2/4 z-[99999]">
                 
                 <div className="rounded-lg bg-white relative">
                     <IoIosClose

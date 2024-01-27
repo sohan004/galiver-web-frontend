@@ -7,6 +7,8 @@ import { toggleSignIn } from "../Modal/components/SignIn/SignIn";
 import GlobalLoading, { toggleGlobalLoading } from "../Modal/components/GlobalLoading/GlobalLoading";
 import shoppingCartICon from '../../assets/SidebarIcon/shopping-cart.png'
 import { RiMenu2Fill } from "react-icons/ri";
+import man from '../../assets/SidebarIcon/man.png'
+import notification from '../../assets/SidebarIcon/notification-bell.png'
 const Nav = ({
     showLeftSideBar,
     setShowLeftSideBar,
@@ -58,18 +60,21 @@ const Nav = ({
                     </div>
                     <div className="flex-1 overflow-hidden relative flex items-center bg-slate-100">
                         <input
+                            onClick={() => toggleSignIn('open')}
                             placeholder='search in Galiver'
                             type="text"
                             className="flex-1 bg-transparent px-2 py-2 outline-none " />
                         <div className="absolute right-0 top-0 h-full flex items-center justify-center bg-orange-600 hover:bg-orange-700 cursor-pointer text-white duration-300  p-2 lg:p-3 select-none group"
                         >
-                            <FaSearch  onClick={()=>toggleGlobalLoading('open')} className="group-active:scale-50 duration-300" />
+                            <FaSearch onClick={() => toggleGlobalLoading('open')} className="group-active:scale-50 duration-300" />
                         </div>
                     </div>
-                    <div>
+                    <div className=" flex items-center gap-5">
                         <img
                             onClick={openCartSidebar}
                             src={shoppingCartICon} className="w-6 md:w-7 cursor-pointer duration-150  active:scale-75 select-none" alt="" />
+                        <img src={man} className="h-8 w-8 rounded-full hidden md:block" alt="" />
+                        <img src={notification} className="h-8 w-8 rounded-full hidden md:block" alt="" />
                     </div>
                 </div>
             </div>

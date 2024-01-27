@@ -2,6 +2,7 @@ import logo from '../../assets/logo/png-04.png'
 import profileIcon from '../../assets/SidebarIcon/man.png'
 import orderIcon from '../../assets/SidebarIcon/order.png'
 import messageIcon from '../../assets/SidebarIcon/speech-bubble.png'
+import notify from '../../assets/SidebarIcon/notification-bell.png'
 import icon1 from '../../assets/SidebarIcon/barbecue.png'
 import icon5 from '../../assets/SidebarIcon/eggs.png'
 import icon2 from '../../assets/SidebarIcon/fast-food.png'
@@ -415,8 +416,9 @@ const LeftSidebar = () => {
         <div className="bg-white left-sidebar w-full h-full border-t overflow-y-auto py-4 shadow-xl select-none" >
             <img src={logo} alt="" className='w-36 ms-5 md:hidden mb-7' />
             <div className='flex flex-col border-b pb-3'>
-                <p className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={orderIcon} alt="" /> My Order</p>
-                <NavLink to='/profile' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={profileIcon} alt="" /> Profile</NavLink>
+                <NavLink to='/profile' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3  md:hidden'><img className='w-6 h-6' src={profileIcon} alt="" />Profile</NavLink>
+                <NavLink to='/my-order' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={orderIcon} alt="" />Order</NavLink>
+                <NavLink to='/my-order' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3  md:hidden'><img className='w-6 h-6' src={notify} alt="" />Notification</NavLink>
                 <p className='flex items-center  cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={messageIcon} alt="" /> Messenger</p>
             </div>
             <div>

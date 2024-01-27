@@ -6,6 +6,7 @@ import PlaceOrder from "../pages/PlaceOrder/PlaceOrder"
 import OrderInvoice from "../pages/OrderInvoice/OrderInvoice"
 import LayoutWithNavSidebar from "../Layout/LayoutWithNavSidebar/LayoutWithNavSidebar"
 import Profile from "../pages/Profile/Profile"
+import MyOrder from "../pages/MyOrder/MyOrder"
 
 const router = createBrowserRouter([
     {
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
     {
         path: '/profile',
         element: <Profile></Profile>
-    }
+    },
+    {
+        path: '/my-order',
+        element: <MyOrder></MyOrder>
+    },
 ])
 
 
