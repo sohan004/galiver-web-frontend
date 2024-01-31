@@ -7,6 +7,7 @@ import { useState } from "react";
 import bkash from '../../assets/payment-logo/download.png'
 import card from '../../assets/payment-logo/images.png'
 import { FaArrowLeft } from 'react-icons/fa';
+import { toggleAddressModal } from '../../components/Modal/components/AddressModal/AddressModal';
 
 
 const PlaceOrder = () => {
@@ -25,12 +26,12 @@ const PlaceOrder = () => {
     return (
         <div className="max-w-[1188px] mx-auto">
             <p className="text-center bg-white sticky top-0 z-50 shadow p-2 font-semibold text-xl">Checkout <span className="text-orange-600">(01)</span></p>
-            <p className='flex items-center gap-2 my-3 select-none ms-5 text-sm cursor-pointer duration-300 '><FaArrowLeft className='text-orange-600 '/> Back To Home</p>
+            <p className='flex items-center gap-2 my-3 select-none ms-5 text-sm cursor-pointer duration-300 '><FaArrowLeft className='text-orange-600 ' /> Back To Home</p>
             <div className=" gap-3  flex flex-col md:flex-row px-3">
                 <div className="w-full md:w-[70%]">
-                    <Button w="100%">
-                        + add address
-                    </Button>
+                    <button
+                        onClick={() => toggleAddressModal('open')}
+                        className={`flex items-center gap-2 w-full bg-orange-600 p-2 justify-center  select-none hover:bg-orange-700 duration-300 active:scale-90 text-white rounded-md text-sm`}> + add address</button>
                     <div className="mt-2 rounded-md  p-2 bg-white">
                         {
                             new Array(5).fill(0).map((item, index) => <div key={index} className="flex mt-5 items-center justify-between gap-4 border-b px-3 pb-5 relative">

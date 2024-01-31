@@ -9,6 +9,7 @@ import shoppingCartICon from '../../assets/SidebarIcon/shopping-cart.png'
 import { RiMenu2Fill } from "react-icons/ri";
 import man from '../../assets/SidebarIcon/man.png'
 import notification from '../../assets/SidebarIcon/notification-bell.png'
+import { toggleAddressModal } from "../Modal/components/AddressModal/AddressModal";
 const Nav = ({
     showLeftSideBar,
     setShowLeftSideBar,
@@ -60,7 +61,7 @@ const Nav = ({
                     </div>
                     <div className="flex-1 overflow-hidden relative flex items-center bg-slate-100">
                         <input
-                            onClick={() => toggleSignIn('open')}
+                         
                             placeholder='search in Galiver'
                             type="text"
                             className="flex-1 bg-transparent px-2 py-2 outline-none " />
@@ -71,7 +72,7 @@ const Nav = ({
                     </div>
                     <div className=" flex items-center gap-5">
                         <img
-                            onClick={openCartSidebar}
+                           
                             src={shoppingCartICon} className="w-6 md:w-7 cursor-pointer duration-150  active:scale-75 select-none" alt="" />
                         <img src={man} className="h-8 w-8 rounded-full hidden md:block" alt="" />
                         <img src={notification} className="h-8 w-8 rounded-full hidden md:block" alt="" />
