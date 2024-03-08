@@ -61,7 +61,7 @@ const Nav = ({
                     </div>
                     <div className="flex-1 overflow-hidden relative flex items-center bg-slate-100">
                         <input
-                         
+                           onClick={() => toggleAddressModal('open')}
                             placeholder='search in Galiver'
                             type="text"
                             className="flex-1 bg-transparent px-2 py-2 outline-none " />

@@ -102,10 +102,10 @@ const AddressModal = () => {
                                                     focus:outline-none bg-transparent"
                                     placeholder="Your Current Location*" />
                             </div>
-                            <div className="flex items-center gap-3">
+                            {/* <div className="flex items-center gap-3">
                                 <img className="w-6 h-6 md:w-7 md:h-7" src={union} alt="" />
                                 <Select
-                                    className="basic-single flex-1 border-0"
+                                    className="basic-single flex-1 border-0 relative"
                                     classNamePrefix="select"
                                     placeholder="District*"
                                     styles={{ control: (baseStyles, state) => (inputStyle(baseStyles)) }}
@@ -121,7 +121,7 @@ const AddressModal = () => {
                             <div className="flex items-center gap-3">
                                 <img className="w-6 h-6 md:w-7 md:h-7" src={CITY} alt="" />
                                 <Select
-                                    className="basic-single flex-1 border-0"
+                                    className="basic-single flex-1 border-0 relative"
                                     classNamePrefix="select"
                                     placeholder="Area*"
                                     styles={{ control: (baseStyles, state) => (inputStyle(baseStyles)) }}
@@ -130,7 +130,7 @@ const AddressModal = () => {
                                     name="color"
                                     options={getArea()}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                         <div className="text-center mt-4 mb-3">
                             <button className="btn hover:bg-orange-700 bg-orange-600 w-28 border-0 btn-sm  text-white">Save</button>

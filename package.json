@@ -25,6 +25,7 @@
     "react-select": "^5.8.0",
     "react-simple-star-rating": "^5.1.7",
     "react-to-print": "^2.14.15",
+    "socket.io-client": "^4.7.4",
     "sort-by": "^1.2.0",
     "swiper": "^10.2.0"
   },

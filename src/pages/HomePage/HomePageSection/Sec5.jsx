@@ -1,10 +1,12 @@
 
+import { useNavigate } from 'react-router-dom';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 
 
 const Sec5 = () => {
+    const navigate = useNavigate();
     return (
-        <div className='w-full mt-5 lg:mt-8'>
+        <div  className='w-full mt-5 lg:mt-8'>
             <div className='flex justify-between items-end'>
                 <div>
                     <h1 className=' font-medium lg:text-2xl '>Just For You</h1>

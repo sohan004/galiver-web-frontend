@@ -3,414 +3,35 @@ import profileIcon from '../../assets/SidebarIcon/man.png'
 import orderIcon from '../../assets/SidebarIcon/order.png'
 import messageIcon from '../../assets/SidebarIcon/speech-bubble.png'
 import notify from '../../assets/SidebarIcon/notification-bell.png'
-import icon1 from '../../assets/SidebarIcon/barbecue.png'
-import icon5 from '../../assets/SidebarIcon/eggs.png'
-import icon2 from '../../assets/SidebarIcon/fast-food.png'
-import icon3 from '../../assets/SidebarIcon/meat.png'
 import Categories from './components/Categories/Categories'
 import { NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BACKEND_URL } from '../../App'
+import { setCategoryList } from '../../features/categoryList/categoryListSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import SidebarSkleton from '../SidebarSkleton/SidebarSkleton'
 
 
 const LeftSidebar = () => {
 
-    const categories = [
-        {
-            id: 1,
-            icon: icon1,
-            name: 'Barbecue',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 2,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 3,
-                    name: 'Barbecue',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 2,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 3,
-                    name: 'Barbecue',
-                },
-            ]
-        },
-        {
-            id: 2,
-            icon: icon2,
-            name: 'Fast Food',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 2,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 3,
-                    name: 'Fast Food',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 2,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 3,
-                    name: 'Fast Food',
-                },
-            ]
-        },
-        {
-            id: 3,
-            icon: icon3,
-            name: 'Meat',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Meat',
-                },
-                {
-                    id: 2,
-                    name: 'Meat',
-                },
-                {
-                    id: 3,
-                    name: 'Meat',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Meat',
-                },
-                {
-                    id: 2,
-                    name: 'Meat',
-                },
-                {
-                    id: 3,
-                    name: 'Meat',
-                },
-            ]
-        },
-        {
-            id: 4,
-            icon: icon5,
-            name: 'Eggs',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Eggs',
-                },
-                {
-                    id: 2,
-                    name: 'Eggs',
-                },
-                {
-                    id: 3,
-                    name: 'Eggs',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Eggs',
-                },
-                {
-                    id: 2,
-                    name: 'Eggs',
-                },
-                {
-                    id: 3,
-                    name: 'Eggs',
-                },
-            ]
-        },
-        {
-            id: 1,
-            icon: icon1,
-            name: 'Barbecue',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 2,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 3,
-                    name: 'Barbecue',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 2,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 3,
-                    name: 'Barbecue',
-                },
-            ]
-        },
-        {
-            id: 2,
-            icon: icon2,
-            name: 'Fast Food',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 2,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 3,
-                    name: 'Fast Food',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 2,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 3,
-                    name: 'Fast Food',
-                },
-            ]
-        },
-        {
-            id: 3,
-            icon: icon3,
-            name: 'Meat',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Meat',
-                },
-                {
-                    id: 2,
-                    name: 'Meat',
-                },
-                {
-                    id: 3,
-                    name: 'Meat',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Meat',
-                },
-                {
-                    id: 2,
-                    name: 'Meat',
-                },
-                {
-                    id: 3,
-                    name: 'Meat',
-                },
-            ]
-        },
-        {
-            id: 4,
-            icon: icon5,
-            name: 'Eggs',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Eggs',
-                },
-                {
-                    id: 2,
-                    name: 'Eggs',
-                },
-                {
-                    id: 3,
-                    name: 'Eggs',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Eggs',
-                },
-                {
-                    id: 2,
-                    name: 'Eggs',
-                },
-                {
-                    id: 3,
-                    name: 'Eggs',
-                },
-            ]
-        },
-        {
-            id: 1,
-            icon: icon1,
-            name: 'Barbecue',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 2,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 3,
-                    name: 'Barbecue',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 2,
-                    name: 'Barbecue',
-                },
-                {
-                    id: 3,
-                    name: 'Barbecue',
-                },
-            ]
-        },
-        {
-            id: 2,
-            icon: icon2,
-            name: 'Fast Food',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 2,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 3,
-                    name: 'Fast Food',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 2,
-                    name: 'Fast Food',
-                },
-                {
-                    id: 3,
-                    name: 'Fast Food',
-                },
-            ]
-        },
-        {
-            id: 3,
-            icon: icon3,
-            name: 'Meat',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Meat',
-                },
-                {
-                    id: 2,
-                    name: 'Meat',
-                },
-                {
-                    id: 3,
-                    name: 'Meat',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Meat',
-                },
-                {
-                    id: 2,
-                    name: 'Meat',
-                },
-                {
-                    id: 3,
-                    name: 'Meat',
-                },
-            ]
-        },
-        {
-            id: 4,
-            icon: icon5,
-            name: 'Eggs',
-            subCategories: [
-                {
-                    id: 1,
-                    name: 'Eggs',
-                },
-                {
-                    id: 2,
-                    name: 'Eggs',
-                },
-                {
-                    id: 3,
-                    name: 'Eggs',
-                },
-            ],
-            subSubCategories: [
-                {
-                    id: 1,
-                    name: 'Eggs',
-                },
-                {
-                    id: 2,
-                    name: 'Eggs',
-                },
-                {
-                    id: 3,
-                    name: 'Eggs',
-                },
-            ]
-        },
-    ]
+    const { categoryList: category, loading } = useSelector(state => state.categoryList)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (category.length > 0) return
+        fetch(`${BACKEND_URL}/api/v1/category/get-category-list`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.category) {
+                    dispatch(setCategoryList(data.category))
+                }
+            })
+            .catch(() => {
+                dispatch(setCategoryList([]))
+            })
+    }, [])
+
+    console.log(category)
 
     return (
         <div className="bg-white left-sidebar w-full h-full border-t overflow-y-auto py-4 shadow-xl select-none" >
@@ -424,7 +45,8 @@ const LeftSidebar = () => {
             <div>
                 <p className='text-xl mt-4 mb-3 ml-4'>Categories</p>
                 <div>
-                    {categories.map((item, i) => <Categories item={item} key={i} />)}
+                    {!loading ? category.map((item, i) => <Categories item={item} key={i} />)
+                        : <SidebarSkleton></SidebarSkleton>}
                 </div>
             </div>
         </div>
