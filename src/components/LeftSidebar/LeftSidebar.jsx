@@ -31,8 +31,6 @@ const LeftSidebar = () => {
             })
     }, [])
 
-    console.log(category)
-
     return (
         <div className="bg-white left-sidebar w-full h-full border-t overflow-y-auto py-4 shadow-xl select-none" >
             <img src={logo} alt="" className='w-36 ms-5 md:hidden mb-7' />

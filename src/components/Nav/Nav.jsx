@@ -72,7 +72,7 @@ const Nav = ({
                     </div>
                     <div className=" flex items-center gap-5">
                         <img
-                           
+                            onClick={openCartSidebar}
                             src={shoppingCartICon} className="w-6 md:w-7 cursor-pointer duration-150  active:scale-75 select-none" alt="" />
                         <img src={man} className="h-8 w-8 rounded-full hidden md:block" alt="" />
                         <img src={notification} className="h-8 w-8 rounded-full hidden md:block" alt="" />
