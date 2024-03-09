@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Rating } from '@smastrom/react-rating'
-import img from '../../assets/carusalIMG/productIMg2.jpg'
 import '@smastrom/react-rating/style.css'
 import { useNavigate } from 'react-router-dom';
 import getMedia from '../../utilities/getMedia';

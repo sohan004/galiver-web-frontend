@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { BACKEND_URL } from '../../../App';
 import { useDispatch, useSelector } from 'react-redux';
 import { setHomeProduct } from '../../../features/HomeProduct/HomeProductSlice';
+import img from '../../../assets/logo/png-02.png'
+import ProductCardSkleton from '../../../components/ProductCardSkleton/ProductCardSkleton';
 
 
 const Sec5 = () => {
@@ -30,7 +32,7 @@ const Sec5 = () => {
 
     useEffect(() => {
         const loadData = setTimeout(() => {
-            if(products.length > 0) return
+            if (products.length > 0) return
             const limit = getLimit();
             fetch(`${BACKEND_URL}/api/v1/product/search?limit=${limit}`)
                 .then(res => res.json())
@@ -52,7 +54,9 @@ const Sec5 = () => {
                 </div>
             </div>
             <div className='mt-1 lg:mt-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-1 gap-y-2 md:gap-x-4 md:gap-y-5'>
-                {products.map((product, index) => <ProductCard  key={index} product={product} />)}
+                {!loading ? products.map((product, index) => <ProductCard key={index} product={product} />) :
+                new Array(25).fill(0).map((_, i) => <ProductCardSkleton key={i}/>)
+                }
             </div>
         </div>
     );
