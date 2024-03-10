@@ -7,9 +7,10 @@ import OrderInvoice from "../pages/OrderInvoice/OrderInvoice"
 import LayoutWithNavSidebar from "../Layout/LayoutWithNavSidebar/LayoutWithNavSidebar"
 import Profile from "../pages/Profile/Profile"
 import MyOrder from "../pages/MyOrder/MyOrder"
+import SearchPage from "../pages/SearchPage/SearchPage"
 
 const router = () => {
-    
+
     return [
         {
             path: '/',
@@ -26,6 +27,10 @@ const router = () => {
                 {
                     path: '/product/:id',
                     element: <ProductDetailsPage></ProductDetailsPage>
+                },
+                {
+                    path: '/search',
+                    element: <SearchPage></SearchPage>
                 },
             ]
         },

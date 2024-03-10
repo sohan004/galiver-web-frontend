@@ -17,5 +17,5 @@ const homeProductSlice = createSlice({
     },
 });
 
-export const { setHomeProduct } = homeProductSlice.actions
+export const { setHomeProduct, setLoading } = homeProductSlice.actions
 export default homeProductSlice.reducer

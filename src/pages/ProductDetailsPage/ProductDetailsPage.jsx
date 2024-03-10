@@ -38,7 +38,7 @@ const ProductDetailsPage = () => {
                             <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
                         </div>
                         <div className="w-full lg:w-[85%] relative">
-                            <img src={imgLink} className="w-full max-h-[230px]  lg:max-h-[470px] rounded-lg" alt="" />
+                            <img src={imgLink} className="w-full max-h-[230px] md:max-h-[350px]  lg:max-h-[470px] rounded-lg" alt="" />
                             <MdOutlineFavoriteBorder className="text-2xl md:text-3xl absolute bottom-3 right-3 text-orange-600" />
                         </div>
                     </div>

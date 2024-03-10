@@ -50,7 +50,7 @@ const Nav = ({
     }
 
     return (
-        <div className={`sticky select-none ${navShow ? 'top-0' : '-top-40'} ${navTop ? 'shadow-none' : 'shadow-md'}  left-0 w-full duration-700  z-50 `}>
+        <div className={`sticky select-none ${navShow ? 'top-0' : '-top-40'} ${navTop ? 'shadow-none' : 'shadow-md'}  left-0 w-full duration-700  z-[80] `}>
             <div className='bg-white py-3'>
                 <div className='max-w-7xl mx-auto flex gap-3 lg:justify-between items-center lg:gap-7 px-3'>
                     <div className="flex items-center gap-3">
@@ -61,13 +61,12 @@ const Nav = ({
                     </div>
                     <div className="flex-1 overflow-hidden relative flex items-center bg-slate-100">
                         <input
-                           onClick={() => toggleAddressModal('open')}
                             placeholder='search in Galiver'
                             type="text"
                             className="flex-1 bg-transparent px-2 py-2 outline-none " />
                         <div className="absolute right-0 top-0 h-full flex items-center justify-center bg-orange-600 hover:bg-orange-700 cursor-pointer text-white duration-300  p-2 lg:p-3 select-none group"
                         >
-                            <FaSearch onClick={() => toggleGlobalLoading('open')} className="group-active:scale-50 duration-300" />
+                            <FaSearch className="group-active:scale-50 duration-300" />
                         </div>
                     </div>
                     <div className=" flex items-center gap-5">
