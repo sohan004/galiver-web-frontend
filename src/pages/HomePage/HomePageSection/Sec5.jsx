@@ -14,7 +14,7 @@ const Sec5 = () => {
     const { products, loading } = useSelector(state => state.homeProduct)
     const dispatch = useDispatch()
     const [stopLoading, setStopLoading] = useState(true)
-
+    
     const getLimit = () => {
         const width = window.innerWidth;
         if (width < 768) {
@@ -45,11 +45,10 @@ const Sec5 = () => {
         return () => clearTimeout(loadData)
     }, []);
 
-    console.log(products)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleScroll = () => {
-        if (window.innerHeight + window.scrollY >= document.body.scrollHeight && !loading && stopLoading) {
+        if ((window.innerHeight + window.scrollY + 300) >= document.body.scrollHeight && !loading && stopLoading) {
             dispatch(setLoading(true))
             const limit = getLimit();
             fetch(`${BACKEND_URL}/api/v1/product/search?limit=${limit}&skip=${products.length}`)

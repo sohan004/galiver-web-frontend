@@ -7,10 +7,15 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { GiShoppingBag } from "react-icons/gi";
 import { FiShoppingCart } from "react-icons/fi";
+import { useEffect } from "react";
 
 
 
 const ProductDetailsPage = () => {
+
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    }, [])
 
     const imgLink = 'https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-1.png'
 
