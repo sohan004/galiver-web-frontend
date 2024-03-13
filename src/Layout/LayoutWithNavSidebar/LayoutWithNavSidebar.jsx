@@ -7,9 +7,6 @@ const LayoutWithNavSidebar = () => {
 
     const [showLeftSideBar, setShowLeftSideBar] = useState(true)
 
-  
-
-
     return (
         <>
             <div className={` bg-[#f8f8f8] text-black `}>
@@ -28,7 +25,7 @@ const LayoutWithNavSidebar = () => {
                     {/* left sidebar end */}
 
                     {/* main page */}
-                    <div className='duration-500  flex-1 max-w-[1340px] mx-auto relative '>
+                    <div className='duration-500  flex-1 max-w-[1340px] mx-auto relative px-3'>
                         <Outlet></Outlet>
                     </div>
 

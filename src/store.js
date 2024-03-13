@@ -3,6 +3,7 @@ import cartSideBarReducer from "./features/cartSideBar/CartSideBarSlice";
 import authUserReducer from "./features/auth/authUserSlice";
 import categoryListReducer from "./features/categoryList/categoryListSlice";
 import homeProductReducer from "./features/HomeProduct/HomeProductSlice";
+import searchProductReducer from "./features/searchProduct/searchProductSlice";
 
 const store = configureStore({
     reducer:{
@@ -10,6 +11,7 @@ const store = configureStore({
         cartSideBar: cartSideBarReducer,
         categoryList: categoryListReducer,
         homeProduct: homeProductReducer,
+        searchProduct: searchProductReducer
     }
 })
 

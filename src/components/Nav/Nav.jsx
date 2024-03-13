@@ -11,7 +11,9 @@ import { RiMenu2Fill } from "react-icons/ri";
 import man from '../../assets/SidebarIcon/man.png'
 import notification from '../../assets/SidebarIcon/notification-bell.png'
 import { toggleAddressModal } from "../Modal/components/AddressModal/AddressModal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLoading, setProducts } from "../../features/searchProduct/searchProductSlice";
 const Nav = ({
     showLeftSideBar,
     setShowLeftSideBar,
@@ -25,6 +27,16 @@ const Nav = ({
     const [inputFocus, setInputFocus] = useState(false)
     const [searchKeyword, setSearchKeyword] = useState([])
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const location = useLocation()
+
+    useEffect(() => {
+        const search = location.search
+        const searchText = new URLSearchParams(search).get('search')
+        if (searchText) {
+            searchTextRef.current.value = searchText
+        }
+    }, [location])
 
     const getKey = () => {
         const key = localStorage.getItem('search-key')
@@ -84,22 +96,14 @@ const Nav = ({
         toggleCartSideBar('open')
     }
 
-    useEffect(() => {
-        const scrollTo = setTimeout(() => {
-            window.scrollTo(0, 0)
-        }, 500);
-
-        return () => clearTimeout(scrollTo)
-    }, []);
-
     const setNewSearchKey = (text) => {
         const searchKey = localStorage.getItem('search-key') || ''
         const toArray = searchKey.split(',')
-        if (toArray.length >= 5) {
+        if (toArray.length >= 5 && !toArray.includes(text)) {
             toArray.pop()
             toArray.unshift(text)
         }
-        else {
+        else if (!toArray.includes(text)) {
             toArray.unshift(text)
         }
         localStorage.setItem('search-key', toArray.filter(s => {
@@ -113,19 +117,22 @@ const Nav = ({
     const handleSearch = () => {
         if (searchTextRef.current.value) {
             setNewSearchKey(searchTextRef.current.value)
-
-            navigate(`/search`)
+            dispatch(setProducts([]))
+            dispatch(setLoading(true))
+            navigate(`/search?search=${searchTextRef.current.value}`)
             searchTextRef.current.blur()
             setInputFocus(false)
         }
     }
 
+    const searchBtn = (e) => {
+        e.stopPropagation()
+        handleSearch()
+    }
+
     useEffect(() => {
         window.addEventListener('click', (e) => {
-            if (parentRef.current.contains(e.target)) {
-                setInputFocus(true)
-            }
-            else {
+            if (!parentRef?.current?.contains(e.target)) {
                 setInputFocus(false)
             }
         })
@@ -136,6 +143,11 @@ const Nav = ({
         }
     }, [])
 
+    const clickSearchKey = (e, key) => {
+        e.stopPropagation()
+        searchTextRef.current.value = key
+        handleSearch()
+    }
 
     return (
         <div className={`sticky select-none ${navShow ? 'top-0' : '-top-40'} ${navTop ? 'shadow-none' : 'shadow-md'}  left-0 w-full duration-700  z-[80] `}>
@@ -149,6 +161,7 @@ const Nav = ({
                     </div>
                     <div
                         ref={parentRef}
+                        onClick={() => setInputFocus(true)}
                         className="flex-1  relative flex items-center bg-slate-100">
                         <input
                             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -157,13 +170,16 @@ const Nav = ({
                             ref={searchTextRef}
                             className="flex-1 bg-transparent px-2 py-2 outline-none " />
                         <div
-                            onClick={handleSearch}
+                            onClick={searchBtn}
                             className="absolute right-0 top-0 h-full flex items-center justify-center bg-orange-600 hover:bg-orange-700 cursor-pointer text-white duration-300  p-2 lg:p-3 select-none group"
                         ><FaSearch className="group-active:scale-50 duration-300" />
                         </div>
                         {inputFocus && searchKeyword.length > 0 && <div className="absolute text-xs md:text-sm top-full  left-0 w-full p-2 bg-white shadow-lg">
                             <p className="text-xs text-gray-400">Search Key</p>
-                            {searchKeyword.map((key, index) => <p key={index} className="flex cursor-pointer hover:bg-slate-50 justify-between items-center gap-2 p-2 border-b border-gray-100">{key}<span
+                            {searchKeyword.map((key, index) => <p key={index} 
+                            onClick={e => clickSearchKey(e, key)}
+                            className="flex cursor-pointer hover:bg-slate-50 justify-between items-center gap-2 p-2 border-b border-gray-100">{key}<span
+                            className="text-gray-400 font-light"
                                 onClick={e => removeKey(e, index)}
                             >&#10006;</span></p>)}
                         </div>}

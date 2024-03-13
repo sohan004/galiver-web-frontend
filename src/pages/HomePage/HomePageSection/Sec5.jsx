@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setHomeProduct, setLoading } from '../../../features/HomeProduct/HomeProductSlice';
 import img from '../../../assets/logo/png-02.png'
 import ProductCardSkleton from '../../../components/ProductCardSkleton/ProductCardSkleton';
+import getCartLimit from '../../../utilities/getLimit';
 
 
 const Sec5 = () => {
@@ -15,26 +16,12 @@ const Sec5 = () => {
     const dispatch = useDispatch()
     const [stopLoading, setStopLoading] = useState(true)
     
-    const getLimit = () => {
-        const width = window.innerWidth;
-        if (width < 768) {
-            return 12
-        }
-        else if (width < 1024) {
-            return 15
-        }
-        else if (width < 1280) {
-            return 12
-        }
-        else {
-            return 15
-        }
-    }
 
     useEffect(() => {
         const loadData = setTimeout(() => {
             if (products.length > 0) return
-            const limit = getLimit();
+            const limit = getCartLimit();
+            window.scrollTo(0, 0)
             fetch(`${BACKEND_URL}/api/v1/product/search?limit=${limit}`)
                 .then(res => res.json())
                 .then(data => {
@@ -48,9 +35,9 @@ const Sec5 = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleScroll = () => {
-        if ((window.innerHeight + window.scrollY + 300) >= document.body.scrollHeight && !loading && stopLoading) {
+        if ((window.innerHeight + window.scrollY + 300) >= document.body.scrollHeight && !loading && stopLoading && products.length >= getCartLimit()) {
             dispatch(setLoading(true))
-            const limit = getLimit();
+            const limit = getCartLimit();
             fetch(`${BACKEND_URL}/api/v1/product/search?limit=${limit}&skip=${products.length}`)
                 .then(res => res.json())
                 .then(data => {

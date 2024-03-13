@@ -8,7 +8,7 @@ import Sec5 from './HomePageSection/Sec5';
 const HomePage = () => {
 
     return (
-        <div className='px-3 w-full '>
+        <div className=''>
             {/* <Sec1></Sec1>
             <Sec4></Sec4>
             <Sec3></Sec3>
