@@ -8,6 +8,7 @@ import { setHomeProduct, setLoading } from '../../../features/HomeProduct/HomePr
 import img from '../../../assets/logo/png-02.png'
 import ProductCardSkleton from '../../../components/ProductCardSkleton/ProductCardSkleton';
 import getCartLimit from '../../../utilities/getLimit';
+import scrollTop from '../../../Hooks/useScrollTop';
 
 
 const Sec5 = () => {
@@ -15,17 +16,18 @@ const Sec5 = () => {
     const { products, loading } = useSelector(state => state.homeProduct)
     const dispatch = useDispatch()
     const [stopLoading, setStopLoading] = useState(true)
-    
+
 
     useEffect(() => {
         const loadData = setTimeout(() => {
             if (products.length > 0) return
             const limit = getCartLimit();
-            window.scrollTo(0, 0)
+            scrollTop()
             fetch(`${BACKEND_URL}/api/v1/product/search?limit=${limit}`)
                 .then(res => res.json())
                 .then(data => {
-                    if(data.length === 0) setStopLoading(false)
+                    if (data.length === 0) setStopLoading(false)
+                    scrollTop()
                     dispatch(setHomeProduct(data))
                 })
         }, 0);
@@ -41,7 +43,7 @@ const Sec5 = () => {
             fetch(`${BACKEND_URL}/api/v1/product/search?limit=${limit}&skip=${products.length}`)
                 .then(res => res.json())
                 .then(data => {
-                    if(data.length === 0) setStopLoading(false)
+                    if (data.length === 0) setStopLoading(false)
                     dispatch(setHomeProduct([...products, ...data]))
                 })
         }

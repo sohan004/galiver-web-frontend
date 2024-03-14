@@ -1,23 +1,37 @@
 import { FaStar } from "react-icons/fa";
-import ProductDetailsTopSection from "./components/ProductDetailsTopSection/ProductDetailsTopSection";
-import ReviewReletedSection from "./components/ReviewReletedSection/ReviewReletedSection";
-import { MdLocalOffer, MdOutlineFavoriteBorder } from "react-icons/md";
-import { FaCartShopping, FaEarthAfrica, FaPeopleRoof } from "react-icons/fa6";
+import { MdLocalOffer } from "react-icons/md";
+import {  FaEarthAfrica, FaPeopleRoof } from "react-icons/fa6";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { GiShoppingBag } from "react-icons/gi";
 import { FiShoppingCart } from "react-icons/fi";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import scrollTop from "../../Hooks/useScrollTop";
+import { NavLink, useParams } from "react-router-dom";
+import useGetProductDetails from "../../Hooks/useGetProductDetails";
+import { useSelector } from "react-redux";
+import getProductTopCategoryLink from "../../utilities/getCategoryLink";
+import ProductImg from "./components/ProductImg/ProductImg";
+import { Rating } from "@smastrom/react-rating";
+import getParentage from "../../utilities/getParcantage";
 
 
 const ProductDetailsPage = () => {
 
-    useEffect(()=>{
-        window.scrollTo(0,0)
+    const id = useParams().id
+    const user = useSelector(state => state.auth.user)
+    const [product, loading] = useGetProductDetails(id, user?._id)
+
+
+    console.log(product, loading)
+
+    useEffect(() => {
+        scrollTop()
     }, [])
 
     const imgLink = 'https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-1.png'
+
+
 
     return (
         <div className='bg-white p-4 pb-20'>
@@ -25,47 +39,27 @@ const ProductDetailsPage = () => {
             <ReviewReletedSection /> */}
 
             <div className="flex items-center gap-2 text-xs lg:text-sm text-gray-500">
-                <p>Home</p>
-                <span>/</span>
-                <p>Product</p>
-                <span>/</span>
-                <p>Category</p>
-                <span></span>
+                {getProductTopCategoryLink(product?.category, product?.subCategory, product?.subSubCategory)}
             </div>
 
             <div className="flex mt-7 gap-2 lg:gap-8 flex-col lg:flex-row">
                 <div className="w-full lg:w-[60%]">
-                    <div className=" flex items-start gap-5 flex-col-reverse lg:flex-row ">
-                        <div className="lg:w-[15%] w-full grid grid-cols-4 lg:grid-cols-1  gap-6">
-                            <img src={imgLink} className="max-h-32 w-full rounded-md  border border-orange-600" alt="" />
-                            <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
-                            <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
-                            <img src={imgLink} className="max-h-32 w-full rounded-md " alt="" />
-                        </div>
-                        <div className="w-full lg:w-[85%] relative">
-                            <img src={imgLink} className="w-full max-h-[230px] md:max-h-[350px]  lg:max-h-[470px] rounded-lg" alt="" />
-                            <MdOutlineFavoriteBorder className="text-2xl md:text-3xl absolute bottom-3 right-3 text-orange-600" />
-                        </div>
+                    <div>
+                        {product?.media && <ProductImg media={product?.media} />}
+                        <h1 className="text-xl lg:text-3xl font-bold text-gray-800 mt-7 mb-4">{product?.title}</h1>
                     </div>
-                    <h1 className="text-xl lg:text-3xl font-bold text-gray-800 mt-7 mb-4">Jenny’s Closets - The winter top for female, green</h1>
-                </div>  
+                </div>
 
                 <div className="w-full lg:w-[40%]">
                     <div className="flex items-center gap-3  mb-3 lg:mb-6">
-                        <div className="flex items-center gap-1 text-xs text-yellow-500">
-                            <FaStar />
-                            <FaStar />
-                            <FaStar />
-                            <FaStar />
-                            <FaStar />
-                        </div>
-                        <p className="text-sm font-medium text-gray-400">157 Reviews</p>
+                    <Rating readOnly className='max-w-[70px]' value={4.5} />
+                        <p className="text-sm font-medium text-gray-400">{product?.totalReview} Reviews</p>
                     </div>
                     <div className="text-3xl font-bold flex items-center gap-3">
-                        <h3 className="text-orange-600">$49</h3>
-                        <h3 className="text-gray-500 text-xl"><del>$99</del></h3>
+                        <h3 className="text-orange-600">৳{product?.price}</h3>
+                        <h3 className="text-gray-500 text-xl">{product?.discount > 0 &&<del>৳{product?.discount}</del>}</h3>
                     </div>
-                    <p className="text-xs text-gray-500 flex items-center gap-2 mt-2"><MdLocalOffer /> Save 50% right now</p>
+                 {product?.discount > 0 &&   <p className="text-xs text-gray-500 flex items-center gap-2 mt-2"><MdLocalOffer /> Save {getParentage(product?.discount, product?.price)}% right now</p>}
                     <div className="mt-6">
                         <p className="font-semibold">Features</p>
                         <ul className="text-gray-500 flex flex-col gap-1 mt-2 list-disc ps-5">
@@ -101,7 +95,7 @@ const ProductDetailsPage = () => {
                         <p className="py-3 text-black flex items-center gap-1 border-b border-black">Reviews <span className="bg-slate-400 text-white px-2 rounded-full text-xs">50</span></p>
                         <p className="py-3">Supports</p>
                     </div>
-                    {new Array(4).fill(0).map((i) =>
+                    {new Array(4).fill(0).map((_, i) =>
                         <div className="flex items-start gap-4 py-7" key={i}>
                             <img src={imgLink} className="w-12 rounded-full h-12" alt="" />
                             <div>
@@ -120,7 +114,7 @@ const ProductDetailsPage = () => {
                 </div>
                 <div className="w-full lg:w-[40%]">
                     <div className=" grid grid-cols-2">
-                        {new Array(4).fill(0).map((i) => <ProductCard key={i} />)}
+                        {new Array(4).fill(0).map((_, i) => <ProductCard key={i} />)}
                     </div>
                 </div>
             </div>

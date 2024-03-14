@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
     const navigate = useNavigate()
     return (
         <>
-            <div onClick={() => navigate('/product/dsfdfsf')} className='w-full relative bg-white p-2 cursor-pointer  group hover:scale-105 duration-150 hover:shadow-lg'>
+            <div onClick={() => navigate(`/product/${_id}`)} className='w-full relative bg-white p-2 cursor-pointer  group hover:scale-105 duration-150 hover:shadow-lg'>
                 <div className='h-36 lg:h-56 w-full overflow-hidden relative'>
                     <img src={getMedia(media?.name)} className='w-full h-full group-hover:scale-125 duration-300 z-40 relative ' alt="" />
                     <div className='absolute z-30 bg-gradient-to-r from-orange-100 animate-pulse top-0 left-0 w-full h-full flex justify-center items-center'>
