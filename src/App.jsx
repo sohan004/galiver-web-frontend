@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import useSocketConnect from "./Hooks/useSockeConnect";
 import { Toaster } from "react-hot-toast";
 
-export const BACKEND_URL = import.meta.env.MODE === 'development' ? 'http://localhost:3013' : 'https://galiver-backend.onrender.com'
+export const BACKEND_URL = import.meta.env.MODE === 'development' ? 'https://api.galiver.shop' : 'https://api.galiver.shop'
 
 const App = () => {
     const route = router()

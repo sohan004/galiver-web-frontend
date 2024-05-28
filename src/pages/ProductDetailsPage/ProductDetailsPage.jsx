@@ -21,6 +21,7 @@ import { BACKEND_URL } from "../../App";
 import Swal from "sweetalert2";
 import GlobalLoading, { toggleGlobalLoading } from "../../components/Modal/components/GlobalLoading/GlobalLoading";
 import ProductDetailsPageSkleton from "../../components/ProductDetailsPageSkleton/ProductDetailsPageSkleton";
+import getMedia from "../../utilities/getMedia";
 
 
 const ProductDetailsPage = () => {
@@ -207,7 +208,7 @@ const ProductDetailsPage = () => {
                     <div className=" flex items-center gap-0 md:gap-3 mt-7  w-full bg-white md:mb-7">
                         <button
                             onClick={clickBuyNow}
-                            className="btn bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] fixed md:static bottom-0 left-0 w-full z-[100]"><GiShoppingBag className="text-2xl" /> Buy Now</button>
+                            className="flex items-center justify-center py-4 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] fixed md:static bottom-0 left-0 w-full z-[100] active:scale-100"><GiShoppingBag className="text-2xl" /> Buy Now</button>
                         {/* <button className="btn border border-orange-600 text-orange-600 bg-transparent rounded-md hover:bg-orange-600 hover:text-white  max-w-[180px]  ">Add To Cart <FiShoppingCart className="text-xl" /></button> */}
                     </div>
                     <div className=" flex flex-col gap-2">
@@ -225,6 +226,11 @@ const ProductDetailsPage = () => {
                         {/* <p className="py-3">Supports</p> */}
                     </div>
                     <p className="whitespace-pre-wrap mt-2 text-sm md:text-base">{product?.description}</p>
+                    <div className="mt-10 ">
+                        {product?.media && <div className="grid gap-7">
+                            {product?.media.map((media, i) => <img key={i} src={getMedia(media.name)} className="w-full " alt="" />)}
+                        </div>}
+                    </div>
                     {/* {new Array(4).fill(0).map((_, i) =>
                         <div className="flex items-start gap-4 py-7" key={i}>
                             <img src={imgLink} className="w-12 rounded-full h-12" alt="" />
@@ -346,7 +352,7 @@ const ProductDetailsPage = () => {
                         onClick={() => document.getElementById('confirm-modal').close()}
                         className="absolute top-3 right-3 cursor-pointer"> &#10006;</p>
 
-                   {Object.keys(selectedAttribute).length > 0 && <div className="border-t mt-4">
+                    {Object.keys(selectedAttribute).length > 0 && <div className="border-t mt-4">
                         {Object.keys(selectedAttribute).map((attribute, i) => <p key={i} className='text-gray-500 mt-2'>{attribute} : <span className="text-gray-800">{selectedAttribute[attribute]}</span></p>)}
                     </div>}
 
