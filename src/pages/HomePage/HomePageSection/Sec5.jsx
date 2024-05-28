@@ -4,7 +4,7 @@ import ProductCard from '../../../components/ProductCard/ProductCard';
 import { useEffect, useState } from 'react';
 import { BACKEND_URL } from '../../../App';
 import { useDispatch, useSelector } from 'react-redux';
-import { setHomeProduct, setLoading } from '../../../features/HomeProduct/HomeProductSlice';
+import { setHomeProduct, setLoading } from '../../../features/homeProduct/homeProductSlice';
 import img from '../../../assets/logo/png-02.png'
 import ProductCardSkleton from '../../../components/ProductCardSkleton/ProductCardSkleton';
 import getCartLimit from '../../../utilities/getLimit';
