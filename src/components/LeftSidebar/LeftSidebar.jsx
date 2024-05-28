@@ -34,14 +34,14 @@ const LeftSidebar = () => {
     return (
         <div className="bg-white left-sidebar w-full h-full border-t overflow-y-auto py-4 shadow-xl select-none" >
             <img src={logo} alt="" className='w-36 ms-5 md:hidden mb-7' />
-            <div className='flex flex-col border-b pb-3'>
+            {/* <div className='flex flex-col border-b pb-3'>
                 <NavLink to='/profile' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3  md:hidden'><img className='w-6 h-6' src={profileIcon} alt="" />Profile</NavLink>
                 <NavLink to='/my-order' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={orderIcon} alt="" />Order</NavLink>
                 <NavLink to='/my-order' className='flex items-center cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3  md:hidden'><img className='w-6 h-6' src={notify} alt="" />Notification</NavLink>
                 <p className='flex items-center  cursor-pointer gap-2 hover:bg-slate-200 duration-300 px-5 py-3 '><img className='w-6 h-6' src={messageIcon} alt="" /> Messenger</p>
-            </div>
+            </div> */}
             <div>
-                <p className='text-xl mt-4 mb-3 ml-4'>Categories</p>
+                <p className='text-xl  mb-3 ml-4'>Categories</p>
                 <div>
                     {!loading ? category.map((item, i) => <Categories item={item} key={i} />)
                         : <SidebarSkleton></SidebarSkleton>}

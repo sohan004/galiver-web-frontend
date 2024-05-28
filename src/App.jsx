@@ -4,6 +4,7 @@ import CartSideBar from "./components/CartSideBar/CartSideBar";
 import Modal from "./components/Modal/Modal";
 import { useSelector } from "react-redux";
 import useSocketConnect from "./Hooks/useSockeConnect";
+import { Toaster } from "react-hot-toast";
 
 export const BACKEND_URL = import.meta.env.MODE === 'development' ? 'http://localhost:3013' : 'https://galiver-backend.onrender.com'
 
@@ -25,6 +26,11 @@ const App = () => {
 
                 {/* all global modal */}
                 <Modal />
+
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
             </div>
         </>
     );

@@ -8,15 +8,14 @@ import logo from '../../assets/logo/png-02.png'
 
 const ProductCard = ({ product }) => {
     const {
-        avgRating,
         discount,
         media,
         price,
-        reviews,
         tags,
         title,
         _id } = product || {}
     const navigate = useNavigate()
+    console.log(discount, price);
     return (
         <>
             <div onClick={() => navigate(`/product/${_id}`)} className='w-full relative bg-white p-2 cursor-pointer  group hover:scale-105 duration-150 hover:shadow-lg'>
@@ -28,12 +27,11 @@ const ProductCard = ({ product }) => {
                 </div>
                 <p className='text-sm  mt-2'>{title}</p>
                 <div className='flex gap-1 items-center'>
-                    <p className='text-lg text-orange-600 font-medium'>৳{price}</p>
-                    {discount > 0 && <s className='text-sm opacity-70'>৳{discount}</s>}
+                    <p className='text-lg text-orange-600 font-medium'>৳{price - discount}</p>
+                    {discount > 0 && <s className='text-sm opacity-70'>৳{price}</s>}
                 </div>
                 <div className='flex gap-1 items-center'>
-                    <Rating readOnly className='max-w-[70px]' value={avgRating} />
-                    <p className='text-xs opacity-60'>({reviews < 10 ? '0' : ''}{reviews})</p>
+                    <Rating readOnly className='max-w-[70px]' value={5} />
                 </div>
             </div>
         </>
