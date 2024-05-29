@@ -37,7 +37,7 @@ const ProductImg = ({ media }) => {
             </div>
             <div
                 ref={mainImgRef}
-                className={`w-full lg:w-[85%] border  relative rounded-lg overflow-hidden h-[320px] md:h-[470px]`}>
+                className={`w-full lg:w-[85%] border  relative rounded-lg overflow-hidden h-[350px] md:h-[500px]`}>
                 <img
                     src={getMainPhoto()} className="w-full  left-0 top-0 absolute  h-full z-40" alt="" />
                 <ImgSkleton></ImgSkleton>

@@ -225,7 +225,7 @@ const ProductDetailsPage = () => {
                         <p className="py-3 text-black flex items-center gap-1 border-b border-black">Description </p>
                         {/* <p className="py-3">Supports</p> */}
                     </div>
-                    <p className="whitespace-pre-wrap mt-2 text-sm md:text-base">{product?.description}</p>
+                    <p className="whitespace-pre-wrap break-all mt-2 text-sm md:text-base">{product?.description}</p>
                     <div className="mt-10 ">
                         {product?.media && <div className="grid gap-7">
                             {product?.media.map((media, i) => <img key={i} src={getMedia(media.name)} className="w-full " alt="" />)}
