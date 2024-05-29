@@ -22,6 +22,7 @@ import Swal from "sweetalert2";
 import GlobalLoading, { toggleGlobalLoading } from "../../components/Modal/components/GlobalLoading/GlobalLoading";
 import ProductDetailsPageSkleton from "../../components/ProductDetailsPageSkleton/ProductDetailsPageSkleton";
 import getMedia from "../../utilities/getMedia";
+import { pushToDataLayer } from "../../main";
 
 
 const ProductDetailsPage = () => {
@@ -68,11 +69,23 @@ const ProductDetailsPage = () => {
             }
         })
         if (err) return
+        pushToDataLayer('buyNowButtonClick', {
+            product: product?.title,
+            price: product?.price,
+            discount: product?.discount,
+            productId: product?._id
+        })
         document.getElementById('buy-modal').showModal()
     }
 
 
-    const corfirmOrder = () => {
+    const confirmOrder = () => {
+        pushToDataLayer('orderConfirmButtonClick', {
+            product: product?.title,
+            price: product?.price,
+            discount: product?.discount,
+            productId: product?._id
+        })
         toggleGlobalLoading('open')
         document.getElementById('confirm-modal').close()
         fetch(`${BACKEND_URL}/api/v1/order`, {
@@ -106,6 +119,7 @@ const ProductDetailsPage = () => {
             })
             .finally(() => toggleGlobalLoading())
     }
+
 
 
     if (loading) return <ProductDetailsPageSkleton />
@@ -380,7 +394,7 @@ const ProductDetailsPage = () => {
                     <button
                         disabled={!(name && phone && district && subDistrict && address)}
                         onClick={() => {
-                            corfirmOrder()
+                            confirmOrder()
                             // document.getElementById('confirm-modal').close()
                         }}
                         className="btn bg-orange-600 border-orange-600 text-white rounded-md hover:bg-orange-800 w-full mt-5">অর্ডার কনফার্ম করুন </button>

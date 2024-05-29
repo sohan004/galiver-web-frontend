@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import getMedia from '../../utilities/getMedia';
 import getParentage from '../../utilities/getParcantage';
 import logo from '../../assets/logo/png-02.png'
+import { pushToDataLayer } from '../../main';
 
 const ProductCard = ({ product }) => {
     const {
@@ -15,10 +16,21 @@ const ProductCard = ({ product }) => {
         title,
         _id } = product || {}
     const navigate = useNavigate()
-    console.log(discount, price);
+
+
+    const clickProduct = () => {
+        pushToDataLayer('productClick', {
+            product: title,
+            price: price,
+            discount: discount,
+            productId: _id
+        })
+        navigate(`/product/${_id}`)
+    }
+
     return (
         <>
-            <div onClick={() => navigate(`/product/${_id}`)} className='w-full relative bg-white p-2 cursor-pointer  group hover:scale-105 duration-150 hover:shadow-lg'>
+            <div onClick={clickProduct} className='w-full relative bg-white p-2 cursor-pointer  group hover:scale-105 duration-150 hover:shadow-lg'>
                 <div className='h-44 lg:h-60 w-full overflow-hidden relative'>
                     <img src={getMedia(media?.name)} className='w-full h-full group-hover:scale-125 duration-300 z-40 relative ' alt="" />
                     <div className='absolute z-30 bg-gradient-to-r from-orange-100 animate-pulse top-0 left-0 w-full h-full flex justify-center items-center'>

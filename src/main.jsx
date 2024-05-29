@@ -12,6 +12,19 @@ const tagManagerArgs = {
 
 TagManager.initialize(tagManagerArgs);
 
+const pushToDataLayer = (event, data) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: event,
+    ...data
+  });
+};
+
+pushToDataLayer('pageLoad', {
+  page: 'home page',
+});
+
+
 // node version 20.7.0
 // block z index 1000000, 10000000, 9999, 99999
 
@@ -23,3 +36,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>,
 )
+
+export { pushToDataLayer }
