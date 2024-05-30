@@ -28,6 +28,10 @@ const ProductCard = ({ product }) => {
         navigate(`/product/${_id}`)
     }
 
+    const getTitle = () => {
+return title.length > 50 ? title.slice(0, 30) + '...' : title
+    }
+
     return (
         <>
             <div onClick={clickProduct} className='w-full relative bg-white p-2 cursor-pointer  group hover:scale-105 duration-150 hover:shadow-lg'>
@@ -37,7 +41,7 @@ const ProductCard = ({ product }) => {
                         <img src={logo} className='w-16 md:w-20' alt="" /></div>
                     {discount > 0 && <p className='text-xs absolute top-0 left-0 bg-orange-600 text-white py-[2px] rounded-se-lg rounded-es-md px-1 z-50'><s className='opacity-60'>৳{discount}</s> <span className=''>-{getParentage(discount, price)}%</span></p>}
                 </div>
-                <p className='text-sm  mt-2'>{title}</p>
+                <p className='text-sm  mt-2'>{getTitle()}</p>
                 <div className='flex gap-1 items-center'>
                     <p className='text-lg text-orange-600 font-medium'>৳{price - discount}</p>
                     {discount > 0 && <s className='text-sm opacity-70'>৳{price}</s>}
