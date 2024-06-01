@@ -222,7 +222,7 @@ const ProductDetailsPage = () => {
                     <div className=" flex items-center gap-0 md:gap-3 mt-7  w-full bg-white md:mb-7">
                         <button
                             onClick={clickBuyNow}
-                            className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] fixed md:static bottom-0 left-0 w-full z-[100] active:scale-100"><GiShoppingBag className="text-2xl" /> Buy Now</button>
+                            className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] fixed md:static bottom-0 left-0 w-full z-[100] active:scale-100"><GiShoppingBag className="text-2xl" />অর্ডার করুন</button>
                         {/* <button className="btn border border-orange-600 text-orange-600 bg-transparent rounded-md hover:bg-orange-600 hover:text-white  max-w-[180px]  ">Add To Cart <FiShoppingCart className="text-xl" /></button> */}
                     </div>
                     <div className=" flex flex-col gap-2">
@@ -378,7 +378,7 @@ const ProductDetailsPage = () => {
                         </div>
                         <div className='flex justify-between'>
                             <p className='text-gray-500'>Quantity</p>
-                            <p className='text-gray-800'>{quantity}</p>
+                            <p className='text-gray-800'>{quantity}x</p>
                         </div>
                         <div className='flex justify-between'>
                             <p className='text-gray-500'>Delivery charge</p>
