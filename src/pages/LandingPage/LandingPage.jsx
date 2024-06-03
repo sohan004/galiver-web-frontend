@@ -9,7 +9,7 @@ import { BACKEND_URL } from '../../App';
 
 const LandingPage = () => {
 
-    const [product, loading] = useGetProductDetails('6656381518a1042dc69f33b7')
+    const [product, loading] = useGetProductDetails('6658d7bfb23a67a7a28594e1')
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [district, setDistrict] = useState('')
@@ -79,14 +79,16 @@ const LandingPage = () => {
     return (
         <div className="md:p-5 p-2">
             <h1 className="text-center font-bold text-3xl md:text-5xl text-orange-600">এবার দু*ধের মতো ফর্সা হবে ইনশাআল্লাহ !!</h1>
-            <h1 className="text-center font-bold my-3 md:my-7 text-xl md:text-4xl text-orange-800">Hand Made Original Saffron Goat Milk Soap</h1>
-            <div className="text-2xl md:text-4xl font-bold flex items-center justify-center gap-3  mb-4 ">
-                <h3 className="text-orange-600">৳{product?.price - product.discount}</h3>
-                <h3 className="text-gray-500 text-xl">{product?.discount > 0 && <del>৳{product?.price}</del>}</h3>
+            <h1 className="text-center font-bold my-3 md:my-7 text-lg md:text-3xl text-orange-800">Hand Made Original Saffron Goat Milk Soap</h1>
+            <div className="text-2xl max-w-md mx-auto rounded-xl bg-red-600 py-3 text-white md:text-4xl font-bold flex items-center justify-center gap-3  mb-4 ">
+                <h3 className="">মূল্যঃ 
+                {product?.price - product.discount} টাকা</h3>
+                <h3 className=" text-xl">{product?.discount > 0 && <del>৳{product?.price}</del>}</h3>
             </div>
+            {orderButton}
             <h1 className="text-center  bg-orange-600 text-white p-5 font-bold text-xl  md:text-2xl mt-3">✔ ত্বক হবে দুধের মত ফর্সা, দাগ হীন,  মসৃণ, নমনীয় এবং গ্লাস স্কিন</h1>
             <img
-                className='mx-auto h-[400PX] md:h-[600px] object-cover'
+                className='mx-auto h-[400PX] mt-3 md:h-[600px] object-cover'
                 src={img1} alt="" />
             {orderButton}
             <h1 className="text-center mt-5  bg-orange-600 text-white p-5 font-bold  text-xl md:text-2xl ">
