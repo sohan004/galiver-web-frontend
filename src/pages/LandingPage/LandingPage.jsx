@@ -9,7 +9,7 @@ import { BACKEND_URL } from '../../App';
 
 const LandingPage = () => {
 
-    const [product, loading] = useGetProductDetails('6658d7bfb23a67a7a28594e1')
+    const [product, loading] = useGetProductDetails('6656381518a1042dc69f33b7')
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [district, setDistrict] = useState('')
