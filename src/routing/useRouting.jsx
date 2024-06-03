@@ -8,6 +8,7 @@ import LayoutWithNavSidebar from "../Layout/LayoutWithNavSidebar/LayoutWithNavSi
 import Profile from "../pages/Profile/Profile"
 import MyOrder from "../pages/MyOrder/MyOrder"
 import SearchPage from "../pages/SearchPage/SearchPage"
+import LandingPage from "../pages/LandingPage/LandingPage"
 
 const router = () => {
 
@@ -49,6 +50,10 @@ const router = () => {
         {
             path: '/my-order',
             element: <MyOrder></MyOrder>
+        },
+        {
+            path: '/landing-page',
+            element: <LandingPage></LandingPage>
         },
     ]
 }
