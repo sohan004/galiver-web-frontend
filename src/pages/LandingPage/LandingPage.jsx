@@ -72,17 +72,17 @@ const LandingPage = () => {
 
     const orderButton = <div
         onClick={() => document.getElementById('buy-modal').showModal()}
-        className='flex justify-center mt-3'>
+        className='flex justify-center mt-3 animate-bounce '>
         <button className='btn bg-green-500 text-white font-bold text-2xl'>অর্ডার করুন</button>
     </div>
 
     return (
         <div className="md:p-5 p-2">
             <h1 className="text-center font-bold text-3xl md:text-5xl text-orange-600">এবার দু*ধের মতো ফর্সা হবে ইনশাআল্লাহ !!</h1>
-            <h1 className="text-center font-bold my-3 md:my-7 text-lg md:text-3xl text-orange-800">Hand Made Original Saffron Goat Milk Soap</h1>
+            <h1 className="text-center font-bold my-3 md:my-7 text-lg md:text-3xl text-orange-800">Hand Made Original Saffron Goat Milk Soap (100gm)</h1>
             <div className="text-2xl max-w-md mx-auto rounded-xl bg-red-600 py-3 text-white md:text-4xl font-bold flex items-center justify-center gap-3  mb-4 ">
-                <h3 className="">মূল্যঃ 
-                {product?.price - product.discount} টাকা</h3>
+                <h3 className="">মূল্যঃ    
+                  <span className='ms-2'>{product?.price - product.discount}</span> টাকা</h3>
                 <h3 className=" text-xl">{product?.discount > 0 && <del>৳{product?.price}</del>}</h3>
             </div>
             {orderButton}
