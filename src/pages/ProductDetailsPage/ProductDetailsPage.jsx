@@ -233,7 +233,7 @@ const ProductDetailsPage = () => {
                 </div>
             </div>
             <div className="flex  gap-8 flex-col lg:flex-row mt-7">
-                <div className="w-full lg:w-[60%]">
+                <div className="w-full">
                     <div className="flex items-end gap-6 text-gray-500 border-b lg:gap-8 text-xs lg:text-sm ">
                         {/* <p className="py-3">Description</p> */}
                         <p className="py-3 text-black flex items-center gap-1 border-b border-black">Description </p>
@@ -262,12 +262,12 @@ const ProductDetailsPage = () => {
                             </div>
                         </div>)} */}
                 </div>
-                <div className="w-full lg:w-[40%]">
+                {/* <div className="w-full lg:w-[40%]">
                     <div className=" grid grid-cols-2">
                         {randomProduct[0].map((product, index) => <ProductCard key={index} product={product} />)}
                         {randomProduct[1] && new Array(15).fill(0).map((_, i) => <ProductCardSkleton key={i} />)}
                     </div>
-                </div>
+                </div> */}
             </div>
 
 
