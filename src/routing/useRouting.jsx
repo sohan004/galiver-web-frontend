@@ -9,6 +9,8 @@ import Profile from "../pages/Profile/Profile"
 import MyOrder from "../pages/MyOrder/MyOrder"
 import SearchPage from "../pages/SearchPage/SearchPage"
 import LandingPage from "../pages/LandingPage/LandingPage"
+import Landing from "../pages/Landing/Landing"
+import { BACKEND_URL } from "../App"
 
 const router = () => {
 
@@ -54,6 +56,11 @@ const router = () => {
         {
             path: '/landing-page',
             element: <LandingPage></LandingPage>
+        },
+        {
+            path: '/landing/:id',
+            element: <Landing></Landing>,
+            loader: ({ params }) => fetch(`${BACKEND_URL}/api/v1/landing-page/${params.id}`)
         },
     ]
 }

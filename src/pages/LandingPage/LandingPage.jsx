@@ -79,14 +79,13 @@ const LandingPage = () => {
     return (
         <div className="md:p-5 p-2">
             <h1 className="text-center font-bold text-3xl md:text-5xl text-orange-600">এবার দু*ধের মতো ফর্সা হবে ইনশাআল্লাহ !!</h1>
-            <h1 className="text-center font-bold my-3 md:my-7 text-lg md:text-3xl text-orange-800">Hand Made Original Saffron Goat Milk Soap (100gm)</h1>
-            <div className="text-2xl max-w-md mx-auto rounded-xl bg-red-600 py-3 text-white md:text-4xl font-bold flex items-center justify-center gap-3  mb-4 ">
+            <div className="text-2xl mt-4 max-w-md mx-auto rounded-xl bg-red-600 py-3 text-white md:text-4xl font-bold flex items-center justify-center gap-3  mb-4 ">
                 <h3 className="">মূল্যঃ    
                   <span className='ms-2'>{product?.price - product.discount}</span> টাকা</h3>
                 <h3 className=" text-xl">{product?.discount > 0 && <del>৳{product?.price}</del>}</h3>
             </div>
             {orderButton}
-            <h1 className="text-center  bg-orange-600 text-white p-5 font-bold text-xl  md:text-2xl mt-3">✔ ত্বক হবে দুধের মত ফর্সা, দাগ হীন,  মসৃণ, নমনীয় এবং গ্লাস স্কিন</h1>
+            <h1 className="text-center  bg-orange-600 text-white p-5 font-bold text-xl  md:text-2xl mt-3">Hand Made Original Saffron Goat Milk Soap (100gm)</h1>
             <img
                 className='mx-auto h-[400PX] mt-3 md:h-[600px] object-cover'
                 src={img1} alt="" />
@@ -108,7 +107,21 @@ const LandingPage = () => {
                 className='mx-auto h-[300px] md:h-[600px] mt-3 object-cover'
                 src={img2} alt="" />
             {orderButton}
-
+            <h1 className="text-center  bg-orange-600 text-white p-5 font-bold text-xl  md:text-2xl mt-3">✔ ত্বক হবে দুধের মত ফর্সা, দাগ হীন,  মসৃণ, নমনীয় এবং গ্লাস স্কিন</h1>
+            <div className='break-words whitespace-pre-wrap mt-4 text-lg md:text-2xl max-w-6xl mx-auto'>
+                ✅ কয়েকদিন ব্যবহার করার সাথে সাথেই আপনি পরিবর্তন লক্ষ্য করে ফেলবেন।  <br />
+                ✅ এটা ব্যবহারে আপনার এই স্কিন ব্রাইট করবে <br />
+                ✅ স্কিন একদম ভেতর থেকে ক্লিন করবে <br />
+                ✅ অনেক সফট করবে <br />
+                ✅ আস্তে আস্তে ত্বকের দাগগুলো কমাবে। <br />
+                ✅ এই সাবানটি ত্বকে ব্রণ কমাতে অনেক বেশি সাহায্য করে। <br />
+                ✅ আপনার ফুল বডিতে এই সাবানটি ব্যবহার করতে পারবেন যা আপনার বডিকে ফেইসের ত্বকের মতো সুন্দর করে ফেলবে।
+            </div>
+            {orderButton}
+            <img
+                className='mx-auto h-[300px] md:h-[600px] mt-3 object-cover'
+                src={img2} alt="" />
+            {orderButton}
             <dialog id="buy-modal" className="modal">
                 <div className="modal-box max-w-[5৫0px] rounded-md bg-white  relative select-none">
                     <p

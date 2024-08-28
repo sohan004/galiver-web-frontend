@@ -1,36 +1,19 @@
-import { FaStar } from "react-icons/fa";
-import { MdLocalOffer } from "react-icons/md";
-import { FaEarthAfrica, FaPeopleRoof } from "react-icons/fa6";
-import { RiSecurePaymentFill } from "react-icons/ri";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import { GiShoppingBag } from "react-icons/gi";
-import { FiShoppingCart } from "react-icons/fi";
-import { useEffect, useState } from "react";
-import scrollTop from "../../Hooks/useScrollTop";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import useGetProductDetails from "../../Hooks/useGetProductDetails";
-import { useSelector } from "react-redux";
-import getProductTopCategoryLink from "../../utilities/getCategoryLink";
-import ProductImg from "./components/ProductImg/ProductImg";
-import { Rating } from "@smastrom/react-rating";
-import getParentage from "../../utilities/getParcantage";
-import useGetRandomProduct from "../../Hooks/useGetRandomProduct";
-import ProductCardSkleton from "../../components/ProductCardSkleton/ProductCardSkleton";
-import toast from "react-hot-toast";
-import { BACKEND_URL } from "../../App";
-import Swal from "sweetalert2";
-import GlobalLoading, { toggleGlobalLoading } from "../../components/Modal/components/GlobalLoading/GlobalLoading";
-import ProductDetailsPageSkleton from "../../components/ProductDetailsPageSkleton/ProductDetailsPageSkleton";
-import getMedia from "../../utilities/getMedia";
-import { pushToDataLayer } from "../../main";
+import { useEffect, useState } from 'react';
+import useGetProductDetails from '../../Hooks/useGetProductDetails';
+import img1 from '../../assets/landing/download (3).jpeg'
+import img2 from '../../assets/landing/download (7).jpeg'
+import { pushToDataLayer } from '../../main';
+import { toggleGlobalLoading } from '../../components/Modal/components/GlobalLoading/GlobalLoading';
+import { BACKEND_URL } from '../../App';
+import toast from 'react-hot-toast';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import getMedia from '../../utilities/getMedia';
 
 
-const ProductDetailsPage = () => {
+const Landing = () => {
 
-    const id = useParams().id
-    const user = useSelector(state => state.auth.user)
-    const [product, loading] = useGetProductDetails(id, user?._id)
-    const randomProduct = useGetRandomProduct()
+    const [product, setProduct] = useState({})
     const [selectedAttribute, setSelectedAttribute] = useState({})
     const [quantity, setQuantity] = useState(1)
     const [name, setName] = useState('')
@@ -40,11 +23,13 @@ const ProductDetailsPage = () => {
     const [address, setAddress] = useState('')
     const [deliveryCharge, setDeliveryCharge] = useState(130)
     const navigate = useNavigate()
-
+    const { data } = useLoaderData()
+    console.log(data);
 
     useEffect(() => {
-        scrollTop()
-    }, [id])
+        setProduct(data?.product)
+    }, [data?.product])
+
 
 
     const getAttributes = (name) => {
@@ -60,23 +45,6 @@ const ProductDetailsPage = () => {
         return selectedAttribute[name] === value ? true : false
     }
 
-    const clickBuyNow = () => {
-        let err = null
-        Object.keys(product?.attributes).forEach(attribute => {
-            if (!selectedAttribute[attribute] && !err && product?.attributes[attribute].length > 0) {
-                err = true
-                toast.error('Please select ' + attribute)
-            }
-        })
-        if (err) return
-        document.getElementById('buy-modal').showModal()
-        pushToDataLayer('buyNowButtonClick', {
-            product: product?.title,
-            price: product?.price,
-            discount: product?.discount,
-            productId: product?._id
-        })
-    }
 
 
     const confirmOrder = () => {
@@ -121,38 +89,77 @@ const ProductDetailsPage = () => {
     }
 
 
+    const click = () => {
+        document.getElementById('varient-modal').close()
+        document.getElementById('buy-modal').showModal()
+        pushToDataLayer('buyNowButtonClick', {
+            product: product?.title,
+            price: product?.price,
+            discount: product?.discount,
+            productId: product?._id
+        })
+    }
 
-    if (loading) return <ProductDetailsPageSkleton />
+    const checkDissabled = () => {
+        let err = null
+        Object.keys(product?.attributes || {}).forEach(attribute => {
+            if (!selectedAttribute[attribute] && !err && product?.attributes[attribute].length > 0) {
+                err = true
+            }
+        })
+        if (err) return true
+        else return false
+    }
+
+    const orderButton = <div
+        onClick={() => document.getElementById(checkDissabled() ? 'varient-modal' : 'buy-modal').showModal()}
+        className='flex justify-center mt-3 animate-bounce '>
+        <button className='btn bg-green-500 text-white font-bold text-2xl'>অর্ডার করুন</button>
+    </div>
 
     return (
-        <div className='bg-white p-1 md:p-2 lg:p-4 pb-20'>
-            <div className="flex mt-2 items-center gap-2 text-xs lg:text-sm text-gray-500">
-                {getProductTopCategoryLink(product?.category, product?.subCategory, product?.subSubCategory)}
+        <div className="md:p-5 p-2">
+            <h1 className="text-center font-bold text-3xl md:text-5xl text-orange-600">{data?.headline}</h1>
+            <div className="text-2xl mt-4 max-w-md mx-auto rounded-xl bg-red-600 py-3 text-white md:text-4xl font-bold flex items-center justify-center gap-3  mb-4 ">
+                <h3 className="">মূল্যঃ
+                    <span className='ms-2'>{product?.price - product.discount}</span> টাকা</h3>
+                <h3 className=" text-xl">{product?.discount > 0 && <del>৳{product?.price}</del>}</h3>
             </div>
+            {orderButton}
+            <h1 className="text-center  bg-orange-600 text-white p-5 font-bold text-xl  md:text-2xl mt-3">{product?.title}</h1>
+            <img
+                className='mx-auto h-[400PX] mt-3 md:h-[600px] object-cover'
+                src={getMedia(data?.img1)} alt="" />
+            {orderButton}
+            <h1 className="text-center mt-5  bg-orange-600 text-white p-5 font-bold  text-xl md:text-2xl ">
+            {data?.title1}</h1>
 
-            <div className="flex mt-4 gap-2 lg:gap-8 flex-col lg:flex-row">
-                <div className="w-full lg:w-[60%]">
-                    <div>
-                        {product?.media && <ProductImg media={product?.media} />}
+            <div className='break-words whitespace-pre-wrap mt-4 text-lg md:text-2xl max-w-6xl mx-auto'>
+            {data?.description1}
+            </div>
+            {orderButton}
+            <img
+                className='mx-auto h-[300px] md:h-[600px] mt-3 object-cover'
+                src={getMedia(data?.img2)} alt="" />
+            {orderButton}
+            <h1 className="text-center  bg-orange-600 text-white p-5 font-bold text-xl  md:text-2xl mt-3">{data?.title2}</h1>
+            <div className='break-words whitespace-pre-wrap mt-4 text-lg md:text-2xl max-w-6xl mx-auto'>
+            {data?.description2}
+            </div>
+            {orderButton}
+            <img
+                className='mx-auto h-[300px] md:h-[600px] mt-3 object-cover'
+                src={getMedia(data?.img3)} alt="" />
+            {orderButton}
 
-                    </div>
-                </div>
 
-                <div className="w-full lg:w-[40%]">
-                    {/* <div className="flex items-center gap-3  mb-3 lg:mb-6">
-                        <Rating readOnly className='max-w-[70px]' value={4.5} />
-                        <p className="text-sm font-medium text-gray-400">{product?.totalReview} Reviews</p>
-                    </div> */}
-                    {product?.discount > 0 && <p className="text-xs text-gray-500 flex items-center gap-2 "><MdLocalOffer /> Save {getParentage(product?.discount, product?.price)}% right now</p>}
-                    <h1 className="text-xl lg:text-3xl font-bold text-gray-800 mt-3 mb-4">{product?.title}</h1>
-                    <div className="text-3xl font-bold flex items-center gap-3  mb-4 ">
-                        <h3 className="text-orange-600">৳{product?.price - product.discount}</h3>
-                        <h3 className="text-gray-500 text-xl">{product?.discount > 0 && <del>৳{product?.price}</del>}</h3>
-                    </div>
-
-                    {/* color */}
+            <dialog id="varient-modal" className="modal">
+                <div className="modal-box max-w-[5৫0px] rounded-md bg-white  relative select-none">
+                    <p
+                        onClick={() => document.getElementById('varient-modal').close()}
+                        className="absolute top-3 right-3 cursor-pointer"> &#10006;</p>
                     {getAttributes('color').length > 0 && <div className="mb-6">
-                        <p className="font-semibold">Colors</p>
+                        <p className="font-semibold text-orange-600">কালার পছন্দ করুন*</p>
                         <div className="flex items-center gap-3 mt-1">
                             {getAttributes('color').map((color, i) => <span
                                 onClick={() => selectAttribute('color', color.name)}
@@ -160,7 +167,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </div>}
                     {getAttributes('height').length > 0 && <div className="mb-6">
-                        <p className="font-semibold">Height</p>
+                        <p className="font-semibold text-orange-600">উচ্চতা পছন্দ করুন*</p>
                         <div className="flex items-center gap-3 mt-1 text-sm">
                             {getAttributes('height').map((height, i) => <span
                                 onClick={() => selectAttribute('height', height.name)}
@@ -168,7 +175,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </div>}
                     {getAttributes('material').length > 0 && <div className="mb-6">
-                        <p className="font-semibold">Material</p>
+                        <p className="font-semibold text-orange-600">মেটেরিয়াল পছন্দ করুন*</p>
                         <div className="flex items-center gap-3 mt-1 text-sm">
                             {getAttributes('material').map((material, i) => <span
                                 onClick={() => selectAttribute('material', material.name)}
@@ -176,7 +183,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </div>}
                     {getAttributes('size').length > 0 && <div className="mb-6">
-                        <p className="font-semibold">Size</p>
+                        <p className="font-semibold text-orange-600">সাইজ পছন্দ করুন*</p>
                         <div className="flex items-center gap-3 mt-1 text-sm">
                             {getAttributes('size').map((size, i) => <span
                                 onClick={() => selectAttribute('size', size.name)}
@@ -184,7 +191,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </div>}
                     {getAttributes('variant').length > 0 && <div className="mb-6">
-                        <p className="font-semibold">Variant</p>
+                        <p className="font-semibold text-orange-600">ভেরিয়েন্ট পছন্দ করুন*</p>
                         <div className="flex items-center gap-3 mt-1 text-sm">
                             {getAttributes('variant').map((variant, i) => <span
                                 onClick={() => selectAttribute('variant', variant.name)}
@@ -192,16 +199,15 @@ const ProductDetailsPage = () => {
                         </div>
                     </div>}
                     {getAttributes('width').length > 0 && <div className="mb-6">
-                        <p className="font-semibold">Width</p>
+                        <p className="font-semibold text-orange-600">প্রস্থ পছন্দ করুন</p>
                         <div className="flex items-center gap-3 mt-1 text-sm">
                             {getAttributes('width').map((width, i) => <span
                                 onClick={() => selectAttribute('width', width.name)}
                                 key={i} className={`  cursor-pointer border-r py-1 px-2 ${activeAttribute('width', width.name) ? 'bg-orange-500 text-white shadow-lg rounded' : ''}`}>{width.value}</span>)}
                         </div>
                     </div>}
-
                     <div className="">
-                        <p className="font-semibold">Quantity</p>
+                        <p className="font-semibold text-orange-600">কত পিছ নিতে চাচ্ছেন</p>
                         <div className=" gap-3 mt-1 flex items-center select-none">
                             <span
                                 onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
@@ -218,59 +224,12 @@ const ProductDetailsPage = () => {
                                 className="text-xl font-bold  cursor-pointer">+</span>
                         </div>
                     </div>
-
-                    <div className=" flex items-center gap-0 md:gap-3 mt-7  w-full bg-white md:mb-7">
-                        <button
-                            onClick={clickBuyNow}
-                            className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] fixed md:static bottom-0 left-0 w-full z-[100] active:scale-100"><GiShoppingBag className="text-2xl" />অর্ডার করুন</button>
-                        {/* <button className="btn border border-orange-600 text-orange-600 bg-transparent rounded-md hover:bg-orange-600 hover:text-white  max-w-[180px]  ">Add To Cart <FiShoppingCart className="text-xl" /></button> */}
-                    </div>
-                    <div className=" flex flex-col gap-2">
-                        <p className="flex items-center gap-2 text-sm text-gray-500"><FaEarthAfrica />Hassle-free shipping</p>
-                        <p className="flex items-center gap-2 text-sm text-gray-500"><RiSecurePaymentFill />100% Secured Payment</p>
-                        <p className="flex items-center gap-2 text-sm text-gray-500"><FaPeopleRoof />Made by the Professionals</p>
-                    </div>
+                    <button
+                        disabled={checkDissabled()}
+                        onClick={click}
+                        className="btn bg-orange-600 border-orange-600 text-white rounded-md hover:bg-orange-800 w-full mt-5"> সাবমিট করুন </button>
                 </div>
-            </div>
-            <div className="flex  gap-8 flex-col lg:flex-row mt-7">
-                <div className="w-full">
-                    <div className="flex items-end gap-6 text-gray-500 border-b lg:gap-8 text-xs lg:text-sm ">
-                        {/* <p className="py-3">Description</p> */}
-                        <p className="py-3 text-black flex items-center gap-1 border-b border-black">Description </p>
-                        {/* <p className="py-3">Supports</p> */}
-                    </div>
-                    <p className="whitespace-pre-wrap break-all mt-2 text-sm md:text-base">{product?.description}</p>
-                    <div className="mt-10 ">
-                        {product?.media && <div className="grid gap-7">
-                            {product?.media.map((media, i) => <img key={i} src={getMedia(media.name)} className="w-full " alt="" />)}
-                        </div>}
-                    </div>
-                    {/* {new Array(4).fill(0).map((_, i) =>
-                        <div className="flex items-start gap-4 py-7" key={i}>
-                            <img src={imgLink} className="w-12 rounded-full h-12" alt="" />
-                            <div>
-                                <div className="flex items-center gap-1 text-sm text-orange-400">
-                                    <FaStar />
-                                    <FaStar />
-                                    <FaStar />
-                                    <FaStar />
-                                    <FaStar />
-                                </div>
-                                <p className="text-sm my-2 lg:my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo debitis aut molestiae sit nesciunt magnam totam quaerat accusantium iste voluptas?</p>
-                                <p className="font-semibold">aryan sohan</p>
-                                <p className="text-sm text-gray-500">12/5/23</p>
-                            </div>
-                        </div>)} */}
-                </div>
-                {/* <div className="w-full lg:w-[40%]">
-                    <div className=" grid grid-cols-2">
-                        {randomProduct[0].map((product, index) => <ProductCard key={index} product={product} />)}
-                        {randomProduct[1] && new Array(15).fill(0).map((_, i) => <ProductCardSkleton key={i} />)}
-                    </div>
-                </div> */}
-            </div>
-
-
+            </dialog>
 
             <dialog id="buy-modal" className="modal">
                 <div className="modal-box max-w-[5৫0px] rounded-md bg-white  relative select-none">
@@ -354,7 +313,6 @@ const ProductDetailsPage = () => {
 
 
             <dialog id="confirm-modal" className="modal">
-
                 <div className="modal-box max-w-[5৫0px] rounded-md bg-white  relative select-none">
                     <p className=' md:text-lg '>Details</p>
                     <p className='text-gray-500 mt-2'>নাম : <span className="text-gray-800">{name}</span></p>
@@ -400,11 +358,8 @@ const ProductDetailsPage = () => {
                         className="btn bg-orange-600 border-orange-600 text-white rounded-md hover:bg-orange-800 w-full mt-5">অর্ডার কনফার্ম করুন </button>
                 </div>
             </dialog>
-
-
         </div>
     );
 };
 
-export default ProductDetailsPage;
-// new commit
+export default Landing;
