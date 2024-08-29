@@ -112,7 +112,7 @@ const Landing = () => {
     }
 
     const orderButton = <div
-        onClick={() => document.getElementById(checkDissabled() ? 'varient-modal' : 'buy-modal').showModal()}
+        onClick={() => document.getElementById('varient-modal').showModal()}
         className='flex justify-center mt-3 animate-bounce '>
         <button className='btn bg-green-500 text-white font-bold text-2xl'>অর্ডার করুন</button>
     </div>
