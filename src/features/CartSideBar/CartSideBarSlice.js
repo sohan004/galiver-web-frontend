@@ -18,8 +18,11 @@ const cartSideBarSlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload
         },
+        clearCart: (state) => {
+            state.cart = {}
+        }
     }
 })
 
-export const { setCart, setLoading } = cartSideBarSlice.actions
+export const { setCart, setLoading , clearCart} = cartSideBarSlice.actions
 export default cartSideBarSlice.reducer

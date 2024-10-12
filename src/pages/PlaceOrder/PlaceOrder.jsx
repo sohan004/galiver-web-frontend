@@ -10,7 +10,7 @@ import card from '../../assets/payment-logo/images.png'
 import { FaArrowLeft } from 'react-icons/fa';
 import { toggleAddressModal } from '../../components/Modal/components/AddressModal/AddressModal';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useFetchCartProductDetails from '../../Hooks/useFetchCartProductDetails';
 import getMedia from '../../utilities/getMedia';
 import { getAttrebute } from '../../utilities/cart';
@@ -21,6 +21,7 @@ import { toggleGlobalLoading } from '../../components/Modal/components/GlobalLoa
 import { BACKEND_URL } from '../../App';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+import { clearCart, setCart } from '../../features/CartSideBar/CartSideBarSlice';
 
 
 const PlaceOrder = () => {
@@ -39,6 +40,7 @@ const PlaceOrder = () => {
     const navigate = useNavigate()
     const [showModal, setShowModal] = useState(true)
     const [totalProduct, setTotalProduct] = useState(0)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         product.forEach(item => {
@@ -143,6 +145,7 @@ const PlaceOrder = () => {
                 });
                 if (!query.get('product')) {
                     localStorage.removeItem('galiver-cart')
+                    dispatch(clearCart())
                 }
                 navigate('/')
             })
