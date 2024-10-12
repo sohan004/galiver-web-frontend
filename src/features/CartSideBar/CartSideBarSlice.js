@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    cart: [],
+    cart: {},
     loading: true,
 }
 
@@ -13,6 +13,7 @@ const cartSideBarSlice = createSlice({
     reducers: {
         setCart: (state, action) => {
             state.cart = action.payload
+            state.loading = false
         },
         setLoading: (state, action) => {
             state.loading = action.payload

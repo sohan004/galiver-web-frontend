@@ -12,7 +12,6 @@ const ProductCard = ({ product }) => {
         discount,
         media,
         price,
-        tags,
         title,
         _id } = product || {}
     const navigate = useNavigate()

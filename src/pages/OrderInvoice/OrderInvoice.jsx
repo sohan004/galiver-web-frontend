@@ -6,6 +6,7 @@ import Button from '../../components/Button/Button';
 import { FaDownload } from 'react-icons/fa';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import './style.css'
 
 const OrderInvoice = () => {
 
@@ -13,6 +14,12 @@ const OrderInvoice = () => {
 
     const handlePrint = useReactToPrint({
         content: () => ref.current,
+        pageStyle: `@media print {
+            @page {
+              size: 58mm ${ref?.current?.clientHeight}px;
+              margin: 0;
+            }
+          }`
     });
 
     '../../../.././ecommerce-practice/src/pages/OrderInvoice/OrderInvoice.jsx'
@@ -25,8 +32,8 @@ const OrderInvoice = () => {
                     <Button><FaDownload /> Download</Button>
                 </span>
             </div>
-            <div className=" shadow-lg">
-                <div ref={ref} className="bg-white w-full p-4 md:p-8 rounded-lg   relative mx-auto">
+            <div className=" shadow-lg ">
+                <div ref={ref} className="bg-white max-w-[50mm] overflow-hidden ovh w-full p-4 md:p-8 rounded-lg   relative mx-auto">
                     <img className='absolute w-64 left-2/4 top-2/4 -translate-x-2/4 opacity-5 -translate-y-2/4' src={logo2} alt="" />
                     <div className="mb-5 flex justify-between">
                         <h1 className="text-xl md:text-2xl font-extrabold  text-gray-800">Order Invoice</h1>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Nav from "../../components/Nav/Nav";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import { Outlet } from "react-router-dom";
+import CartSideBar from "../../components/CartSideBar/CartSideBar";
 
 const LayoutWithNavSidebar = () => {
 
@@ -14,6 +15,7 @@ const LayoutWithNavSidebar = () => {
                     showLeftSideBar={showLeftSideBar}
                     setShowLeftSideBar={setShowLeftSideBar}
                 ></Nav>
+                <CartSideBar />
 
                 <div className='w-full flex items-start gap-3'>
 

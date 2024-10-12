@@ -12,8 +12,9 @@ import man from '../../assets/SidebarIcon/man.png'
 import notification from '../../assets/SidebarIcon/notification-bell.png'
 import { toggleAddressModal } from "../Modal/components/AddressModal/AddressModal";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setProducts } from "../../features/searchProduct/searchProductSlice";
+import { getCart } from "../../utilities/cart";
 const Nav = ({
     showLeftSideBar,
     setShowLeftSideBar,
@@ -29,6 +30,7 @@ const Nav = ({
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
+    const cart = useSelector(state => state.cartSideBar.cart)
 
     useEffect(() => {
         const search = location.search
@@ -37,6 +39,8 @@ const Nav = ({
             searchTextRef.current.value = searchText
         }
     }, [location])
+
+
 
     const getKey = () => {
         const key = localStorage.getItem('search-key')
@@ -149,6 +153,10 @@ const Nav = ({
         handleSearch()
     }
 
+    const getCartLength = () => {
+        return Object.keys(cart).length
+    }
+
     return (
         <div className={`sticky select-none ${navShow ? 'top-0' : '-top-40'} ${navTop ? 'shadow-none' : 'shadow-md'}  left-0 w-full duration-700  z-[80] `}>
             <div className='bg-white py-3'>
@@ -176,21 +184,24 @@ const Nav = ({
                         </div>
                         {inputFocus && searchKeyword.length > 0 && <div className="absolute text-xs md:text-sm top-full  left-0 w-full p-2 bg-white shadow-lg">
                             <p className="text-xs text-gray-400">Search Key</p>
-                            {searchKeyword.map((key, index) => <p key={index} 
-                            onClick={e => clickSearchKey(e, key)}
-                            className="flex cursor-pointer hover:bg-slate-50 justify-between items-center gap-2 p-2 border-b border-gray-100">{key}<span
-                            className="text-gray-400 font-light"
-                                onClick={e => removeKey(e, index)}
-                            >&#10006;</span></p>)}
+                            {searchKeyword.map((key, index) => <p key={index}
+                                onClick={e => clickSearchKey(e, key)}
+                                className="flex cursor-pointer hover:bg-slate-50 justify-between items-center gap-2 p-2 border-b border-gray-100">{key}<span
+                                    className="text-gray-400 font-light"
+                                    onClick={e => removeKey(e, index)}
+                                >&#10006;</span></p>)}
                         </div>}
                     </div>
-                    {/* <div className=" flex items-center gap-5">
-                        <img
-                            onClick={openCartSidebar}
-                            src={shoppingCartICon} className="w-6 md:w-7 cursor-pointer duration-150  active:scale-75 select-none" alt="" />
-                        <img src={man} className="h-8 w-8 rounded-full hidden md:block" alt="" />
-                        <img src={notification} className="h-8 w-8 rounded-full hidden md:block" alt="" />
-                    </div> */}
+                    <div className=" flex items-center gap-5">
+                        <div className="w-6 md:w-7 relative">
+                            <img
+                                onClick={openCartSidebar}
+                                src={shoppingCartICon} className=" w-full h-full cursor-pointer duration-150  active:scale-75 select-none" alt="" />
+                            {getCartLength() > 0 && <div className="absolute shadow-md -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex justify-center items-center font-medium">{getCartLength()}</div>}
+                        </div>
+                        {/* <img src={man} className="h-8 w-8 rounded-full hidden md:block" alt="" />
+                        <img src={notification} className="h-8 w-8 rounded-full hidden md:block" alt="" /> */}
+                    </div>
                 </div>
             </div>
         </div>

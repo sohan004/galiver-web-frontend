@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import scrollTop from "../../Hooks/useScrollTop";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import useGetProductDetails from "../../Hooks/useGetProductDetails";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import getProductTopCategoryLink from "../../utilities/getCategoryLink";
 import ProductImg from "./components/ProductImg/ProductImg";
 import { Rating } from "@smastrom/react-rating";
@@ -23,6 +23,9 @@ import GlobalLoading, { toggleGlobalLoading } from "../../components/Modal/compo
 import ProductDetailsPageSkleton from "../../components/ProductDetailsPageSkleton/ProductDetailsPageSkleton";
 import getMedia from "../../utilities/getMedia";
 import { pushToDataLayer } from "../../main";
+import { RiShoppingCartLine } from "react-icons/ri";
+import { addToCart } from "../../utilities/cart";
+
 
 
 const ProductDetailsPage = () => {
@@ -40,6 +43,7 @@ const ProductDetailsPage = () => {
     const [address, setAddress] = useState('')
     const [deliveryCharge, setDeliveryCharge] = useState(130)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -63,61 +67,31 @@ const ProductDetailsPage = () => {
     const clickBuyNow = () => {
         let err = null
         Object.keys(product?.attributes).forEach(attribute => {
-            if (!selectedAttribute[attribute] && !err && product?.attributes[attribute].length > 0) {
+            if (!selectedAttribute[attribute] && !err && product?.attributes[attribute]?.length > 0) {
                 err = true
                 toast.error('Please select ' + attribute)
             }
         })
         if (err) return
-        document.getElementById('buy-modal').showModal()
-        pushToDataLayer('buyNowButtonClick', {
-            product: product?.title,
-            price: product?.price,
-            discount: product?.discount,
-            productId: product?._id
-        })
+        const attributes = Object.keys(selectedAttribute).map(key => `${key}=${selectedAttribute[key]}`).join('&')
+        navigate(`/place-order?product=${product?._id}&quantity=${quantity}&${attributes}`)
     }
 
-
-    const confirmOrder = () => {
-        pushToDataLayer('orderConfirmButtonClick', {
-            product: product?.title,
-            price: product?.price,
-            discount: product?.discount,
-            productId: product?._id
+    const clickToCart = () => {
+        let err = null
+        Object.keys(product?.attributes).forEach(attribute => {
+            if (!selectedAttribute[attribute] && !err && product?.attributes[attribute]?.length > 0) {
+                err = true
+                toast.error('Please select ' + attribute)
+            }
         })
-        toggleGlobalLoading('open')
-        document.getElementById('confirm-modal').close()
-        fetch(`${BACKEND_URL}/api/v1/order`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                product: product?._id,
-                quantity,
-                name,
-                phone,
-                district,
-                subDistrict,
-                address,
-                deliveryCharge,
-                ...selectedAttribute
-            })
+        if (err) return
+        addToCart(dispatch,{
+            product: product?._id,
+            quantity,
+            ...selectedAttribute
         })
-            .then(res => res.json())
-            .then(data => {
-                Swal.fire({
-                    title: "ধন্যবাদ।",
-                    text: "আপনার অর্ডারটি সফলভাবে প্রক্রিয়াধীন করা হয়েছে। আমাদের কর্মী আপনার সাথে যোগাযোগ করবে।",
-                    icon: ""
-                });
-                navigate('/')
-            })
-            .catch(err => {
-                toast.error('Something went wrong')
-            })
-            .finally(() => toggleGlobalLoading())
+        toast.success('Added to cart successfully')
     }
 
 
@@ -126,7 +100,7 @@ const ProductDetailsPage = () => {
 
     return (
         <div className='bg-white p-1 md:p-2 lg:p-4 pb-20'>
-            <div className="flex mt-2 items-center gap-2 text-xs lg:text-sm text-gray-500">
+            <div className="flex mt-2 flex-wrap items-center gap-2 text-xs lg:text-sm text-gray-500">
                 {getProductTopCategoryLink(product?.category, product?.subCategory, product?.subSubCategory)}
             </div>
 
@@ -222,7 +196,10 @@ const ProductDetailsPage = () => {
                     <div className=" flex items-center gap-0 md:gap-3 mt-7  w-full bg-white md:mb-7">
                         <button
                             onClick={clickBuyNow}
-                            className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] fixed md:static bottom-0 left-0 w-full z-[100] active:scale-100"><GiShoppingBag className="text-2xl" />অর্ডার করুন</button>
+                            className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] border fixed md:static bottom-0 left-0 w-2/4 z-[100] active:scale-100"><GiShoppingBag className="text-2xl" />Order Now</button>
+                        <button
+                            onClick={clickToCart}
+                            className="flex items-center justify-center py-3 gap-2 text-xl bg-white border-orange-600 text-orange-600 rounded-none md:rounded-md border hover:bg-orange-600 flex-1 md:max-w-[180px] fixed hover:text-white md:static bottom-0 right-0 w-2/4 z-[100] active:scale-100"><RiShoppingCartLine className="text-2xl" />Add To Cart</button>
                         {/* <button className="btn border border-orange-600 text-orange-600 bg-transparent rounded-md hover:bg-orange-600 hover:text-white  max-w-[180px]  ">Add To Cart <FiShoppingCart className="text-xl" /></button> */}
                     </div>
                     <div className=" flex flex-col gap-2">
@@ -233,7 +210,7 @@ const ProductDetailsPage = () => {
                 </div>
             </div>
             <div className="flex  gap-8 flex-col lg:flex-row mt-7">
-                <div className="w-full">
+                <div className="w-full lg:w-[60%]">
                     <div className="flex items-end gap-6 text-gray-500 border-b lg:gap-8 text-xs lg:text-sm ">
                         {/* <p className="py-3">Description</p> */}
                         <p className="py-3 text-black flex items-center gap-1 border-b border-black">Description </p>
@@ -262,145 +239,13 @@ const ProductDetailsPage = () => {
                             </div>
                         </div>)} */}
                 </div>
-                {/* <div className="w-full lg:w-[40%]">
+                <div className="w-full lg:w-[40%]">
                     <div className=" grid grid-cols-2">
                         {randomProduct[0].map((product, index) => <ProductCard key={index} product={product} />)}
                         {randomProduct[1] && new Array(15).fill(0).map((_, i) => <ProductCardSkleton key={i} />)}
                     </div>
-                </div> */}
+                </div>
             </div>
-
-
-
-            <dialog id="buy-modal" className="modal">
-                <div className="modal-box max-w-[5৫0px] rounded-md bg-white  relative select-none">
-                    <p
-                        onClick={() => document.getElementById('buy-modal').close()}
-                        className="absolute top-3 right-3 cursor-pointer"> &#10006;</p>
-                    <p className="text-center font-bold   md:text-xl text-orange-600">অর্ডার কনফার্ম করতে ফ্রমটি পূরন করুন</p>
-                    <div className="mt-5 grid gap-4">
-                        <div>
-                            <label htmlFor="name" className="block text-xs md:text-sm font-semibold"> নাম*</label>
-                            <input
-                                name="name"
-                                onChange={(e) => setName(e.target.value)}
-                                value={name}
-                                placeholder="আপনার নাম লিখুন"
-                                type="text" id="name" className="mt-1 placeholder:text-xs w-full border border-gray-300  rounded-md p-1 outline-none px-1 bg-white" />
-                        </div>
-                        <div >
-                            <label htmlFor="phone" className="block text-xs md:text-sm font-semibold">ফোন নাম্বার*</label>
-                            <input
-                                onChange={(e) => setPhone(e.target.value)}
-                                value={phone}
-                                name="phone"
-                                placeholder="আপনার ফোন নাম্বার লিখুন"
-                                type="text" id="phone" className="mt-1 placeholder:text-xs w-full border border-gray-300  rounded-md p-1 outline-none px-1 bg-white" />
-                        </div>
-                        <div >
-                            <label htmlFor="district" className="block text-xs md:text-sm font-semibold">জেলা*</label>
-                            <input
-                                onChange={(e) => setDistrict(e.target.value)}
-                                value={district}
-                                name="district"
-                                placeholder="আপনার জেলার নাম লিখুন"
-                                type="text" id="district" className="mt-1 placeholder:text-xs w-full border border-gray-300  rounded-md p-1 outline-none px-1 bg-white" />
-                        </div>
-                        <div >
-                            <label htmlFor="sub-district" className="block text-xs md:text-sm font-semibold">উপজেলা*</label>
-                            <input
-                                onChange={(e) => setSubDistrict(e.target.value)}
-                                value={subDistrict}
-                                name="sub-district"
-                                placeholder="আপনার উপজেলার নাম লিখুন"
-                                type="text" id="sub-district" className="mt-1 placeholder:text-xs w-full border border-gray-300  rounded-md p-1 outline-none px-1 bg-white" />
-                        </div>
-                        <div >
-                            <label htmlFor="address" className="block text-xs md:text-sm font-semibold">সম্পুর্ন ঠিকানা*</label>
-                            <input
-                                onChange={(e) => setAddress(e.target.value)}
-                                value={address}
-                                name="address"
-                                placeholder="আপনার সম্পুর্ন ঠিকানা লিখুন"
-                                type="text" id="address" className="mt-1 placeholder:text-xs w-full border border-gray-300  rounded-md p-1 outline-none px-1 bg-white" />
-                        </div>
-                        <div >
-                            <label htmlFor="address" className="block text-xs md:text-sm font-semibold mb-2">ডেলিভারি চার্জ*</label>
-                            <div className="flex items-center gap-2 text-xs md:text-sm">
-                                <input type="radio" name="radio-8" className="radio radio-error"
-                                    onChange={() => setDeliveryCharge(70)}
-                                    checked={deliveryCharge === 70}
-                                />
-                                <span>ঢাকা সিটির মধ্যে ৭০ টাকা</span>
-                            </div>
-                            <div className="flex mt-2 items-center gap-2 text-xs md:text-sm">
-                                <input type="radio" name="radio-8" className="radio radio-error"
-                                    onChange={() => setDeliveryCharge(130)}
-                                    checked={deliveryCharge === 130}
-                                />
-                                <span>ঢাকা সিটির বাহিরে ১৩০ টাকা</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button
-                        disabled={!(name && phone && district && subDistrict && address)}
-                        onClick={() => {
-                            document.getElementById('buy-modal').close()
-                            document.getElementById('confirm-modal').showModal()
-                        }}
-                        className="btn bg-orange-600 border-orange-600 text-white rounded-md hover:bg-orange-800 w-full mt-5"> সাবমিট করুন </button>
-                </div>
-            </dialog>
-
-
-            <dialog id="confirm-modal" className="modal">
-
-                <div className="modal-box max-w-[5৫0px] rounded-md bg-white  relative select-none">
-                    <p className=' md:text-lg '>Details</p>
-                    <p className='text-gray-500 mt-2'>নাম : <span className="text-gray-800">{name}</span></p>
-                    <p className='text-gray-500 mt-2'>ফোন নাম্বার : <span className="text-gray-800">{phone}</span></p>
-                    <p className='text-gray-500 mt-2'>জেলা : <span className="text-gray-800">{district}</span></p>
-                    <p className='text-gray-500 mt-2'>উপজেলা : <span className="text-gray-800">{subDistrict}</span></p>
-                    <p className='text-gray-500 mt-2'>ঠিকানা : <span className="text-gray-800">{address}</span></p>
-                    <p
-                        onClick={() => document.getElementById('confirm-modal').close()}
-                        className="absolute top-3 right-3 cursor-pointer"> &#10006;</p>
-
-                    {Object.keys(selectedAttribute).length > 0 && <div className="border-t mt-4">
-                        {Object.keys(selectedAttribute).map((attribute, i) => <p key={i} className='text-gray-500 mt-2'>{attribute} : <span className="text-gray-800">{selectedAttribute[attribute]}</span></p>)}
-                    </div>}
-
-                    <p className=' md:text-lg border-t mt-4 pt-4'>Order Summary</p>
-                    <div className='mt-2 grid text-xs md:text-base gap-1 pb-5 border-b border-dashed'>
-                        <div className='flex justify-between'>
-                            <p className='text-gray-500'>{product?.title}</p>
-                            <p className='text-gray-800'>৳{(product?.price - product.discount)}</p>
-                        </div>
-                        <div className='flex justify-between'>
-                            <p className='text-gray-500'>Quantity</p>
-                            <p className='text-gray-800'>{quantity}x</p>
-                        </div>
-                        <div className='flex justify-between'>
-                            <p className='text-gray-500'>Delivery charge</p>
-                            <p className='text-gray-800'>৳{deliveryCharge}</p>
-                        </div>
-                    </div>
-                    <div className='mt-3'>
-                        <div className='flex justify-between text-lg md:text-xl'>
-                            <p className=''>Total</p>
-                            <p className=''>৳{((product?.price - product.discount) * quantity) + deliveryCharge}</p>
-                        </div>
-                    </div>
-                    <button
-                        disabled={!(name && phone && district && subDistrict && address)}
-                        onClick={() => {
-                            confirmOrder()
-                            // document.getElementById('confirm-modal').close()
-                        }}
-                        className="btn bg-orange-600 border-orange-600 text-white rounded-md hover:bg-orange-800 w-full mt-5">অর্ডার কনফার্ম করুন </button>
-                </div>
-            </dialog>
-
 
         </div>
     );

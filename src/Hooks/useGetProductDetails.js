@@ -4,8 +4,9 @@ import { BACKEND_URL } from "../App"
 
 const useGetProductDetails = (productId, userId) => {
     const [loading, setLoading] = useState(true)
-    const [product, setProduct] = useState({})
-    const navigate = useNavigate()
+    const [product, setProduct] = useState({
+        media : []
+    })
     useEffect(() => {
         const timeOut = setTimeout(() => {
             setLoading(true)
@@ -17,7 +18,7 @@ const useGetProductDetails = (productId, userId) => {
                 })
                 .catch(() => {
                     setLoading(false)
-                    navigate('/product-404 ')
+                    
                 })
         }, 0);
         return () => clearTimeout(timeOut)
