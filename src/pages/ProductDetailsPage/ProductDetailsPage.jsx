@@ -25,6 +25,7 @@ import getMedia from "../../utilities/getMedia";
 import { pushToDataLayer } from "../../main";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { addToCart } from "../../utilities/cart";
+import { toggleCartSideBar } from "../../components/CartSideBar/CartSideBar";
 
 
 
@@ -64,36 +65,42 @@ const ProductDetailsPage = () => {
         return selectedAttribute[name] === value ? true : false
     }
 
-    const clickBuyNow = () => {
+    const clickBuyNow = (type) => {
         let err = null
         Object.keys(product?.attributes).forEach(attribute => {
             if (!selectedAttribute[attribute] && !err && product?.attributes[attribute]?.length > 0) {
                 err = true
-                toast.error('Please select ' + attribute)
             }
         })
-        if (err) return
+        if (err) return document.getElementById('varient-modal').showModal()
         const attributes = Object.keys(selectedAttribute).map(key => `${key}=${selectedAttribute[key]}`).join('&')
-        navigate(`/place-order?product=${product?._id}&quantity=${quantity}&${attributes}`)
+
+        document.getElementById('varient-modal').close()
+        if (type === 'cart') {
+            addToCart(dispatch, {
+                product: product?._id,
+                quantity,
+                ...selectedAttribute
+            })
+            toast.success('Added to cart successfully')
+            toggleCartSideBar('open')
+        }
+        else{
+            navigate(`/place-order?product=${product?._id}&quantity=${quantity}&${attributes}`)
+        }
+
     }
 
-    const clickToCart = () => {
+    const checkDissabled = () => {
         let err = null
-        Object.keys(product?.attributes).forEach(attribute => {
-            if (!selectedAttribute[attribute] && !err && product?.attributes[attribute]?.length > 0) {
+        Object.keys(product?.attributes || {}).forEach(attribute => {
+            if (!selectedAttribute[attribute] && !err && product?.attributes[attribute].length > 0) {
                 err = true
-                toast.error('Please select ' + attribute)
             }
         })
-        if (err) return
-        addToCart(dispatch,{
-            product: product?._id,
-            quantity,
-            ...selectedAttribute
-        })
-        toast.success('Added to cart successfully')
+        if (err) return true
+        else return false
     }
-
 
 
     if (loading) return <ProductDetailsPageSkleton />
@@ -198,7 +205,7 @@ const ProductDetailsPage = () => {
                             onClick={clickBuyNow}
                             className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] border fixed md:static bottom-0 left-0 w-2/4 z-[100] active:scale-100"><GiShoppingBag className="text-2xl" />Order Now</button>
                         <button
-                            onClick={clickToCart}
+                            onClick={() => clickBuyNow('cart')}
                             className="flex items-center justify-center py-3 gap-2 text-xl bg-white border-orange-600 text-orange-600 rounded-none md:rounded-md border hover:bg-orange-600 flex-1 md:max-w-[180px] fixed hover:text-white md:static bottom-0 right-0 w-2/4 z-[100] active:scale-100"><RiShoppingCartLine className="text-2xl" />Add To Cart</button>
                         {/* <button className="btn border border-orange-600 text-orange-600 bg-transparent rounded-md hover:bg-orange-600 hover:text-white  max-w-[180px]  ">Add To Cart <FiShoppingCart className="text-xl" /></button> */}
                     </div>
@@ -246,6 +253,77 @@ const ProductDetailsPage = () => {
                     </div>
                 </div>
             </div>
+
+
+            <dialog id="varient-modal" className="modal">
+                <div className="modal-box max-w-[5৫0px] rounded-md bg-white  relative select-none">
+                    <p
+                        onClick={() => document.getElementById('varient-modal').close()}
+                        className="absolute top-3 right-3 cursor-pointer"> &#10006;</p>
+                    {getAttributes('color').length > 0 && <div className="mb-6">
+                        <p className="font-semibold text-orange-600">Please select color*</p>
+                        <div className="flex items-center gap-3 mt-1">
+                            {getAttributes('color').map((color, i) => <span
+                                onClick={() => selectAttribute('color', color.name)}
+                                key={i} className={`w-7 h-7 rounded cursor-pointer ${activeAttribute('color', color.name) ? 'shadow-lg border-2 border-orange-600' : ''}`} style={{ backgroundColor: color.value }}></span>)}
+                        </div>
+                    </div>}
+                    {getAttributes('height').length > 0 && <div className="mb-6">
+                        <p className="font-semibold text-orange-600">Please select height*</p>
+                        <div className="flex items-center gap-3 mt-1 text-sm">
+                            {getAttributes('height').map((height, i) => <span
+                                onClick={() => selectAttribute('height', height.name)}
+                                key={i} className={`  border-r cursor-pointer py-1 px-2 ${activeAttribute('height', height.name) ? 'bg-orange-500 text-white shadow-lg rounded' : ''}`}>{height.value}</span>)}
+                        </div>
+                    </div>}
+                    {getAttributes('material').length > 0 && <div className="mb-6">
+                        <p className="font-semibold text-orange-600">
+                              Please select material*
+                        </p>
+                        <div className="flex items-center gap-3 mt-1 text-sm">
+                            {getAttributes('material').map((material, i) => <span
+                                onClick={() => selectAttribute('material', material.name)}
+                                key={i} className={`  cursor-pointer border-r py-1 px-2 ${activeAttribute('material', material.name) ? 'bg-orange-500 text-white shadow-lg rounded' : ''}`}>{material.value}</span>)}
+                        </div>
+                    </div>}
+                    {getAttributes('size').length > 0 && <div className="mb-6">
+                        <p className="font-semibold text-orange-600">
+                            Please select size*
+                             </p>
+                        <div className="flex items-center gap-3 mt-1 text-sm">
+                            {getAttributes('size').map((size, i) => <span
+                                onClick={() => selectAttribute('size', size.name)}
+                                key={i} className={`  cursor-pointer border-r py-1 px-2 ${activeAttribute('size', size.name) ? 'bg-orange-500 text-white shadow-lg rounded' : ''}`}>{size.value}</span>)}
+                        </div>
+                    </div>}
+                    {getAttributes('variant').length > 0 && <div className="mb-6">
+                        <p className="font-semibold text-orange-600">
+                            Please select variant*
+                        </p>
+                        <div className="flex items-center gap-3 mt-1 text-sm">
+                            {getAttributes('variant').map((variant, i) => <span
+                                onClick={() => selectAttribute('variant', variant.name)}
+                                key={i} className={`  cursor-pointer border-r py-1 px-2 ${activeAttribute('variant', variant.name) ? 'bg-orange-500 text-white shadow-lg rounded' : ''}`}>{variant.value}</span>)}
+                        </div>
+                    </div>}
+                    {getAttributes('width').length > 0 && <div className="mb-6">
+                        <p className="font-semibold text-orange-600">
+                            Please select width*
+                        </p>
+                        <div className="flex items-center gap-3 mt-1 text-sm">
+                            {getAttributes('width').map((width, i) => <span
+                                onClick={() => selectAttribute('width', width.name)}
+                                key={i} className={`  cursor-pointer border-r py-1 px-2 ${activeAttribute('width', width.name) ? 'bg-orange-500 text-white shadow-lg rounded' : ''}`}>{width.value}</span>)}
+                        </div>
+                    </div>}
+                    <button
+                        disabled={checkDissabled()}
+                        onClick={clickBuyNow}
+                        className="btn bg-orange-600 border-orange-600 text-white rounded-md hover:bg-orange-800 w-full  disabled:bg-gray-300 disabled:text-gray-500"> 
+                         Submit
+                         </button>
+                </div>
+            </dialog>
 
         </div>
     );

@@ -235,11 +235,7 @@ const PlaceOrder = () => {
 
                         <div className=" flex mb-20 flex-col gap-1    ">
                             <p className="text-sm flex items-center text-gray-800 justify-between "><span>Total Price</span> <span className="font-light">৳{getTotalPrice()}</span></p>
-                            <p className="text-sm flex items-center text-gray-800 justify-between "><span>Delivary Charge
-                                <span
-                                    onClick={() => setShowModal(true)}
-                                    className='bg-orange-500 text-white text-xs rounded-full px-1 ms-1 cursor-pointer'>Change</span>
-                            </span> <span className="font-light">৳{deliveryCharge}</span></p>
+                         
                             <p className="text-sm flex items-center text-gray-800 justify-between  border-b pb-3 mb-1"><span>Discount</span> <span className="font-light">-৳{getDiscount()}</span></p>
                             <p className="text-xl flex items-center justify-between font-semibold"><span>Total</span> <span className="font-light">৳{getInTotalPrice()}</span></p>
                         </div>
