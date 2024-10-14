@@ -45,6 +45,7 @@ const ProductDetailsPage = () => {
     const [deliveryCharge, setDeliveryCharge] = useState(130)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [clickCart, setClickCart] = useState(false)
 
 
     useEffect(() => {
@@ -67,6 +68,7 @@ const ProductDetailsPage = () => {
 
     const clickBuyNow = (type) => {
         let err = null
+        setClickCart(type === 'cart' ? true : false)
         Object.keys(product?.attributes).forEach(attribute => {
             if (!selectedAttribute[attribute] && !err && product?.attributes[attribute]?.length > 0) {
                 err = true
@@ -203,10 +205,10 @@ const ProductDetailsPage = () => {
                     <div className=" flex items-center gap-0 md:gap-3 mt-7  w-full bg-white md:mb-7">
                         <button
                             onClick={clickBuyNow}
-                            className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] border fixed md:static bottom-0 left-0 w-2/4 z-[100] active:scale-100"><GiShoppingBag className="text-2xl" />Order Now</button>
+                            className="flex items-center justify-center py-3 gap-2 text-xl bg-orange-600 border-orange-600 text-white rounded-none md:rounded-md hover:bg-orange-800 flex-1 md:max-w-[180px] border fixed md:static bottom-0 right-0 w-2/4 z-[100] active:scale-100"><GiShoppingBag className="text-2xl" />Order Now</button>
                         <button
                             onClick={() => clickBuyNow('cart')}
-                            className="flex items-center justify-center py-3 gap-2 text-xl bg-white border-orange-600 text-orange-600 rounded-none md:rounded-md border hover:bg-orange-600 flex-1 md:max-w-[180px] fixed hover:text-white md:static bottom-0 right-0 w-2/4 z-[100] active:scale-100"><RiShoppingCartLine className="text-2xl" />Add To Cart</button>
+                            className="flex items-center justify-center py-3 gap-2 text-xl bg-yellow-500 border-yellow-500 text-white rounded-none md:rounded-md border hover:bg-yellow-600 flex-1 md:max-w-[180px] fixed  md:static bottom-0 left-0 w-2/4 z-[100] active:scale-100"><RiShoppingCartLine className="text-2xl" />Add To Cart</button>
                         {/* <button className="btn border border-orange-600 text-orange-600 bg-transparent rounded-md hover:bg-orange-600 hover:text-white  max-w-[180px]  ">Add To Cart <FiShoppingCart className="text-xl" /></button> */}
                     </div>
                     <div className=" flex flex-col gap-2">
@@ -318,7 +320,7 @@ const ProductDetailsPage = () => {
                     </div>}
                     <button
                         disabled={checkDissabled()}
-                        onClick={clickBuyNow}
+                        onClick={() => clickBuyNow(clickCart ? 'cart' : 'buy')}
                         className="btn bg-orange-600 border-orange-600 text-white rounded-md hover:bg-orange-800 w-full  disabled:bg-gray-300 disabled:text-gray-500"> 
                          Submit
                          </button>
