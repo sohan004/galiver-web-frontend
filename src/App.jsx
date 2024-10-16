@@ -28,19 +28,20 @@ const App = () => {
     return (
         <>
             <div className=' text-black bg-[#f8f8f8] '>
-                {/* <RouterProvider router={browserRouter} >
+                <RouterProvider router={browserRouter} >
          
 
                 </RouterProvider>
 
+                {/* all sidebar */}
 
+                {/* all global modal */}
                 <Modal />
 
                 <Toaster
                     position="top-center"
                     reverseOrder={false}
-                /> */}
-                <p>website hacked by reo hacker team from pakistan</p>
+                />
             </div>
         </>
     );
