@@ -7,7 +7,6 @@ import useSocketConnect from "./Hooks/useSockeConnect";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { getCart } from "./utilities/cart";
-import khaled from '../src/assets/logo/paglakhaled07152948.jpg'
 
 // export const BACKEND_URL = import.meta.env.MODE === 'development' ? 'http://localhost:3013' : 'https://galiver-backend.onrender.com'
 export const BACKEND_URL = import.meta.env.MODE === 'development' ? 'https://api.galiver.shop' : 'https://api.galiver.shop'
@@ -29,19 +28,20 @@ const App = () => {
     return (
         <>
             <div className=' text-black bg-[#f8f8f8] '>
-                {/* <RouterProvider router={browserRouter} >
+                <RouterProvider router={browserRouter} >
          
 
                 </RouterProvider>
-                
+
+                {/* all sidebar */}
+
+                {/* all global modal */}
                 <Modal />
 
                 <Toaster
                     position="top-center"
                     reverseOrder={false}
-                /> */}
-                <p className="text-2xl">My name is pagla khaled.</p>
-                <img src={khaled} className="w-full" alt="" />
+                />
             </div>
         </>
     );
