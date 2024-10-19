@@ -46,6 +46,29 @@ const ProductDetailsPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [clickCart, setClickCart] = useState(false)
+    const [addDataLayer, setAddDataLayer] = useState(false)
+
+
+    useEffect(() => {
+        if(!addDataLayer && product){
+            pushToDataLayer({
+                event: 'view_item',
+                ecommerce: {
+                    items: [
+                        {
+                            item_name: product.title,
+                            item_id: product._id,
+                            price: product.price - product.discount,
+                            currency: 'BDT',
+                            quantity: 1
+                        }
+                    ]
+                }
+            })
+            setAddDataLayer(true)
+        }
+    }, [product, addDataLayer])
+
 
 
     useEffect(() => {
@@ -86,6 +109,22 @@ const ProductDetailsPage = () => {
             })
             toast.success('Added to cart successfully')
             toggleCartSideBar('open')
+            pushToDataLayer({
+                event: 'add_to_cart',
+                ecommerce: {
+                    currency: 'BDT',
+                    value: product?.price - product?.discount,
+                    items: [
+                        {
+                            item_name: product?.title,
+                            item_id: product?._id,
+                            price: product?.price - product?.discount,
+                            currency: 'BDT',
+                            quantity: quantity
+                        }
+                    ]
+                }
+            }) // add to cart data layer
         }
         else{
             navigate(`/place-order?product=${product?._id}&quantity=${quantity}&${attributes}`)

@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
 import router from "./routing/useRouting";
 import CartSideBar from "./components/CartSideBar/CartSideBar";
 import Modal from "./components/Modal/Modal";
@@ -7,6 +7,7 @@ import useSocketConnect from "./Hooks/useSockeConnect";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { getCart } from "./utilities/cart";
+import { pushToDataLayer } from "./main";
 
 // export const BACKEND_URL = import.meta.env.MODE === 'development' ? 'http://localhost:3013' : 'https://galiver-backend.onrender.com'
 export const BACKEND_URL = import.meta.env.MODE === 'development' ? 'https://api.galiver.shop' : 'https://api.galiver.shop'
@@ -16,11 +17,20 @@ const App = () => {
     const browserRouter = createBrowserRouter(route)
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch()
-
+    const location = useLocation();
 
     useEffect(() => {
         getCart(dispatch)
     }, [])
+
+    useEffect(() => {
+        pushToDataLayer({
+            event: 'page_view',
+            page_location: window.location.href,
+            page_path: location.pathname,
+            page_title: document.title
+        })
+    }, [location])
 
     // socket connection
     useSocketConnect(user)
@@ -29,7 +39,7 @@ const App = () => {
         <>
             <div className=' text-black bg-[#f8f8f8] '>
                 <RouterProvider router={browserRouter} >
-         
+
 
                 </RouterProvider>
 

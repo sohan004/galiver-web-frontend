@@ -48,6 +48,27 @@ const PlaceOrder = () => {
         })
     }, [product])
 
+    useEffect(() => {
+        if (product.length > 0) {
+            pushToDataLayer({
+                event: 'begin_checkout',
+                ecommerce: {
+                    currency: 'BDT',
+                    value: getTotalPrice(),
+                    items: product.map(item => {
+                        return {
+                            item_name: item.title,
+                            item_id: item._id,
+                            price: item.price - item.discount,
+                            currency: 'BDT',
+                            quantity: item.cart.quantity
+                        }
+                    })
+                }
+            })
+        }
+    }, [product])
+
 
     useEffect(() => {
         if (!query.get('product')) {
@@ -138,6 +159,23 @@ const PlaceOrder = () => {
         })
             .then(res => res.json())
             .then(data => {
+                pushToDataLayer({
+                    event: 'purchase',
+                    ecommerce: {
+                        currency: 'BDT',
+                        value: getInTotalPrice(),
+                        affiliation: 'Online Store',
+                        items: product.map(item => {
+                            return {
+                                item_name: item.title,
+                                item_id: item._id,
+                                price: item.price - item.discount,
+                                currency: 'BDT',
+                                quantity: item.cart.quantity
+                            }
+                        })
+                    }
+                }) // order success
                 Swal.fire({
                     title: "ধন্যবাদ।",
                     text: "আপনার অর্ডারটি সফলভাবে প্রক্রিয়াধীন করা হয়েছে। আমাদের কর্মী আপনার সাথে যোগাযোগ করবে।",
@@ -235,7 +273,7 @@ const PlaceOrder = () => {
 
                         <div className=" flex mb-20 flex-col gap-1    ">
                             <p className="text-sm flex items-center text-gray-800 justify-between "><span>Total Price</span> <span className="font-light">৳{getTotalPrice()}</span></p>
-                         
+
                             <p className="text-sm flex items-center text-gray-800 justify-between  border-b pb-3 mb-1"><span>Delivery Charge</span> <span className="font-light">৳{deliveryCharge}</span></p>
                             <p className="text-xl flex items-center justify-between font-semibold"><span>Total</span> <span className="font-light">৳{getInTotalPrice()}</span></p>
                         </div>

@@ -12,17 +12,10 @@ const tagManagerArgs = {
 
 TagManager.initialize(tagManagerArgs);
 
-const pushToDataLayer = (event, data) => {
+const pushToDataLayer = (data) => {
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: event,
-    ...data
-  });
+  window.dataLayer.push(data)
 };
-
-pushToDataLayer('pageLoad', {
-  page: 'home page',
-});
 
 
 // node version 20.7.0

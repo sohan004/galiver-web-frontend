@@ -48,12 +48,6 @@ const Landing = () => {
 
 
     const confirmOrder = () => {
-        pushToDataLayer('orderConfirmButtonClick', {
-            product: product?.title,
-            price: product?.price,
-            discount: product?.discount,
-            productId: product?._id
-        })
         toggleGlobalLoading('open')
         document.getElementById('confirm-modal').close()
         fetch(`${BACKEND_URL}/api/v1/order`, {
@@ -75,6 +69,20 @@ const Landing = () => {
         })
             .then(res => res.json())
             .then(data => {
+                pushToDataLayer({
+                    event: 'purchase',
+                    ecommerce: {
+                        affiliation: 'Online Store',
+                        currency: 'BDT',
+                        value: product?.price - product.discount,
+                        items: [{
+                            item_name: product?.title,
+                            item_id: product?._id,
+                            price: product?.price - product.discount,
+                            quantity
+                        }]
+                    }
+                })
                 Swal.fire({
                     title: "ধন্যবাদ।",
                     text: "আপনার অর্ডারটি সফলভাবে প্রক্রিয়াধীন করা হয়েছে। আমাদের কর্মী আপনার সাথে যোগাযোগ করবে।",
@@ -92,11 +100,18 @@ const Landing = () => {
     const click = () => {
         document.getElementById('varient-modal').close()
         document.getElementById('buy-modal').showModal()
-        pushToDataLayer('buyNowButtonClick', {
-            product: product?.title,
-            price: product?.price,
-            discount: product?.discount,
-            productId: product?._id
+        pushToDataLayer({
+            event: 'begin_checkout',
+            ecommerce: {
+                currency: 'BDT',
+                value: product?.price - product.discount,
+                items: [{
+                    item_name: product?.title,
+                    item_id: product?._id,
+                    price: product?.price - product.discount,
+                    quantity
+                }]
+            }
         })
     }
 
@@ -132,10 +147,10 @@ const Landing = () => {
                 src={getMedia(data?.img1)} alt="" />
             {orderButton}
             <h1 className="text-center mt-5  bg-orange-600 text-white p-5 font-bold  text-xl md:text-2xl ">
-            {data?.title1}</h1>
+                {data?.title1}</h1>
 
             <div className='break-words whitespace-pre-wrap mt-4 text-lg md:text-2xl max-w-6xl mx-auto'>
-            {data?.description1}
+                {data?.description1}
             </div>
             {orderButton}
             <img
@@ -144,7 +159,7 @@ const Landing = () => {
             {orderButton}
             <h1 className="text-center  bg-orange-600 text-white p-5 font-bold text-xl  md:text-2xl mt-3">{data?.title2}</h1>
             <div className='break-words whitespace-pre-wrap mt-4 text-lg md:text-2xl max-w-6xl mx-auto'>
-            {data?.description2}
+                {data?.description2}
             </div>
             {orderButton}
             <img

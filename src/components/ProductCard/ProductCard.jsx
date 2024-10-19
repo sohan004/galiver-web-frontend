@@ -18,17 +18,21 @@ const ProductCard = ({ product }) => {
 
 
     const clickProduct = () => {
-        pushToDataLayer('productClick', {
-            product: title,
-            price: price,
-            discount: discount,
-            productId: _id
+        pushToDataLayer({
+            event: 'select_item',
+            ecommerce: {
+                items: [{
+                    item_id: _id, // Product ID
+                    item_name: title, // Product Name
+                    price: price - discount, // Product Price
+                }]
+            }
         })
         navigate(`/product/${_id}`)
     }
 
     const getTitle = () => {
-return title.length > 50 ? title.slice(0, 30) + '...' : title
+        return title.length > 50 ? title.slice(0, 30) + '...' : title
     }
 
     return (
