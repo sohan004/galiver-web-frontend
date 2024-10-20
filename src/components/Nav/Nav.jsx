@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setProducts } from "../../features/searchProduct/searchProductSlice";
 import { getCart } from "../../utilities/cart";
+import { pushToDataLayer } from "../../main";
 const Nav = ({
     showLeftSideBar,
     setShowLeftSideBar,
@@ -95,6 +96,15 @@ const Nav = ({
             window.removeEventListener('scroll', handleScroll);
         };
     }, [handleScroll]);
+
+    useEffect(() => {
+        pushToDataLayer({
+            event: 'page_view',
+            page_location: window.location.href,
+            page_path: location.pathname,
+            page_title: document.title
+        })
+    }, [location])
 
     const openCartSidebar = () => {
         toggleCartSideBar('open')

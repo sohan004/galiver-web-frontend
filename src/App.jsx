@@ -17,20 +17,11 @@ const App = () => {
     const browserRouter = createBrowserRouter(route)
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch()
-    const location = useLocation();
-
-    useEffect(() => {
+    useEffect(() => {-
         getCart(dispatch)
     }, [])
 
-    useEffect(() => {
-        pushToDataLayer({
-            event: 'page_view',
-            page_location: window.location.href,
-            page_path: location.pathname,
-            page_title: document.title
-        })
-    }, [location])
+    
 
     // socket connection
     useSocketConnect(user)
